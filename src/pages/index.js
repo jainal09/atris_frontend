@@ -19,6 +19,8 @@ import {
 import { EuiHeaderSectionItem } from "@elastic/eui";
 import HomeBody from "../components/HomeBody";
 
+import { FiPlusCircle } from "react-icons/fi";
+
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -80,6 +82,7 @@ export default class HomePage extends Component {
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
+
       </EuiPage>
     );
   }
