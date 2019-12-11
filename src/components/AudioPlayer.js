@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import WaveSurfer from "wavesurfer.js";
 
+import { IoMdPlay } from "react-icons/io";
+import { IoMdPause } from "react-icons/io";
+
 var peaks = [
   0.11818811506032943,
   0.10820856153964996,
@@ -135,12 +138,36 @@ var peaks = [
 ];
 
 export default class AudioPlayer extends Component {
+  state = {
+    playing: false
+  };
+
   componentDidMount = () => {
+    var ctx = document.createElement("canvas").getContext("2d");
+    var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
+    linGrad.addColorStop(0.5, "rgba(255, 255, 255, 1.000)");
+    linGrad.addColorStop(0.5, "rgba(183, 183, 183, 1.000)");
+
     this.wavesurfer = WaveSurfer.create({
       container: "#waveform",
-      waveColor: "#D2EDD4",
-      progressColor: "#46B54D"
+      waveColor: linGrad,
+      progressColor: "hsla(293, 100%, 50%, 0.5)",
+      cursorColor: "#fff",
+      normalize: true,
+      barWidth: 3
     });
+
+    // https://codepen.io/drhouse7x/pen/mEokPW
+
+    // wavesurfer.on("loading", function(percents) {
+    //   document.getElementById("progress").value = percents;
+    // });
+
+    // wavesurfer.on("ready", function(percents) {
+    //     //hide progress bar
+    //   document.getElementById("progress").style.display = "none";
+
+    // });
 
     this.wavesurfer.load(
       "https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3",
@@ -156,13 +183,36 @@ export default class AudioPlayer extends Component {
 
   playIt = () => {
     this.wavesurfer.playPause();
+    this.setState(prevState => ({
+      playing: !prevState.playing
+    }));
   };
 
   render() {
     return (
-      <div>
-        <div id="waveform"></div>
-        <button onClick={this.playIt}>Play/Pause</button>
+      <div style={{ position: "relative" }}>
+        <div
+          id="waveform"
+          style={{ background: "rgba(0,0,0,0.8)", borderRadius: "8px" }}
+        ></div>
+        <button
+          onClick={this.playIt}
+          style={{
+            position: "absolute",
+            left: "8px",
+            bottom: "8px",
+            borderRadius: "50%",
+
+            backgroundColor: "#fff",
+            border: "1px solid white",
+            width: "32px",
+            height: "32px",
+            paddingTop: "3px",
+            paddingLeft: "0px"
+          }}
+        >
+          {this.state.playing ? <IoMdPause /> : <IoMdPlay />}
+        </button>
       </div>
     );
   }
