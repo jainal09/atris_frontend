@@ -6,19 +6,23 @@ import {
   EuiDatePicker,
   EuiFormRow,
   EuiHorizontalRule,
-
   EuiModal,
   EuiModalBody,
   EuiModalFooter,
   EuiModalHeader,
   EuiModalHeaderTitle,
   EuiOverlayMask,
-  EuiFlexGroup, EuiFlexItem
-
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiCard,
+  EuiIcon,
+  EuiFilePicker
 } from "@elastic/eui";
 import HomeMeeting from "./HomeMeeting";
 
 import { FiPlusCircle } from "react-icons/fi";
+import { EuiText } from "@elastic/eui";
+import { EuiSpacer } from "@elastic/eui";
 
 export default class HomeBody extends Component {
   constructor(props) {
@@ -26,7 +30,8 @@ export default class HomeBody extends Component {
 
     this.state = {
       startDate: moment(),
-      isModalVisible: false
+      isModalVisible: false,
+      files: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,6 +42,13 @@ export default class HomeBody extends Component {
       startDate: date
     });
   }
+
+  onChangeFile = files => {
+    this.setState({
+      files: files
+    });
+    console.log("dropped file", files);
+  };
 
   closeModal = () => {
     this.setState({ isModalVisible: false });
@@ -58,10 +70,41 @@ export default class HomeBody extends Component {
             </EuiModalHeader>
 
             <EuiModalBody>
-            <EuiFlexGroup>
-  <EuiFlexItem>Start New meeting</EuiFlexItem>
-  <EuiFlexItem>Upload file</EuiFlexItem>
-</EuiFlexGroup> 
+              <EuiFlexGroup>
+                <EuiFlexItem>
+                  <EuiFlexItem key={1}>
+                    <EuiCard
+                      icon={<EuiIcon size="xxl" type="notebookApp" />}
+                      title={`Start Meeting`}
+                      isDisabled={false}
+                      description="Click to start Meeting and being Awesome."
+                      onClick={() => window.alert("Card clicked")}
+                    />
+                  </EuiFlexItem>
+                </EuiFlexItem>
+                <EuiFlexItem grow={true}>
+                  <EuiFilePicker
+                    id="asdf2"
+                    multiple
+                    initialPromptText={
+                      <>
+                      <EuiText>
+                       
+                       <h4> Drop file to get transcribe</h4>
+                     </EuiText>
+
+                     <EuiSpacer size='sm'/>
+                     <h6> Get awesome transcibe and analysis from audio</h6>
+                      </>
+
+                    }
+                    onChange={files => {
+                      this.onChangeFile(files);
+                    }}
+                    display="large"
+                  />
+                </EuiFlexItem>
+              </EuiFlexGroup>
             </EuiModalBody>
 
             {/* <EuiModalFooter>
