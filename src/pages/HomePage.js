@@ -70,7 +70,7 @@ export default class HomePage extends Component {
             <EuiPageContentHeader>
               <EuiPageContentHeaderSection>
                 <EuiTitle>
-                  <h2>My Home</h2>
+                  <h2>My First Meeting in WOrkd</h2>
                 </EuiTitle>
               </EuiPageContentHeaderSection>
               <EuiPageContentHeaderSection>

@@ -27,6 +27,7 @@ import HomeMeeting from "./HomeMeeting";
 import { FiPlusCircle } from "react-icons/fi";
 import { EuiText } from "@elastic/eui";
 import { EuiSpacer } from "@elastic/eui";
+import { navigate } from '@reach/router';
 
 export default class HomeBody extends Component {
   constructor(props) {
@@ -96,7 +97,9 @@ export default class HomeBody extends Component {
                         title={`Start Meeting`}
                         isDisabled={false}
                         description="Click to start Meeting and being Awesome."
-                        onClick={() => window.alert("Card clicked")}
+                        onClick={() => {
+                            navigate("recording")
+                        }}
                       />
                     </EuiFlexItem>
                   </EuiFlexItem>
