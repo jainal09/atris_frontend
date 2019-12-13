@@ -40,10 +40,10 @@
   }
   
   .root_padding {
-    padding-left: 25px;
-    padding-right: 25px;
+    /* padding-left: 25px;
+    padding-right: 25px; */
     transition: padding-right 250ms;
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
   
   .vr-voice-recorder-container {
@@ -283,8 +283,8 @@
   
   .voice-recorder .waveform-container .audio-editor .canvas-and-controls .waveform-canvas-container .canvas-wrapper {
     position: absolute;
-    left: 70px;
-    right: 70px;
+    left: 15px;
+    right: 15px;
     height: 100%
   }
   
