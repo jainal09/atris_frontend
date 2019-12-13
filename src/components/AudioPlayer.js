@@ -154,7 +154,7 @@ export default class AudioPlayer extends Component {
       progressColor: "hsla(293, 100%, 50%, 0.5)",
       cursorColor: "#fff",
       normalize: true,
-      barWidth: 3
+      // barWidth: 3
     });
 
     // https://codepen.io/drhouse7x/pen/mEokPW

@@ -12,9 +12,15 @@ code {
     monospace;
 }
 
-.react-datepicker-popper {
+/* .react-datepicker-popper {
   z-index: 10 !important;
+} */
+
+.euiDatePicker.euiDatePicker--shadow .react-datepicker-popper {
+  z-index: 3 !important;
+  animation: euiAnimFadeIn 150ms ease-in;
 }
+
 
 .euiFilePicker--large .euiFilePicker__prompt {
   height: 180px !important;

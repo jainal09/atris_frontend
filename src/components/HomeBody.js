@@ -16,7 +16,11 @@ import {
   EuiFlexItem,
   EuiCard,
   EuiIcon,
-  EuiFilePicker
+  EuiFilePicker,
+  EuiFormControlLayout,
+  EuiProgress,
+  EuiButton,
+  EuiButtonEmpty
 } from "@elastic/eui";
 import HomeMeeting from "./HomeMeeting";
 
@@ -31,22 +35,35 @@ export default class HomeBody extends Component {
     this.state = {
       startDate: moment(),
       isModalVisible: false,
-      files: {}
+      files: {},
+      fileUploadView: false,
+      meetingName: "My Awesome Meeting",
+      ProgressValue: 0
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(date) {
+  handleDateChange = date => {
     this.setState({
       startDate: date
     });
-  }
+  };
+
+  handleMeetingNameChange = e => {
+    this.setState({
+      meetingName: e.target.value
+    });
+  };
 
   onChangeFile = files => {
     this.setState({
       files: files
     });
+
+    if (files.length > 0) {
+      this.setState({
+        fileUploadView: true
+      });
+    }
     console.log("dropped file", files);
   };
 
@@ -62,68 +79,132 @@ export default class HomeBody extends Component {
     let modal;
 
     if (this.state.isModalVisible) {
-      modal = (
-        <EuiOverlayMask>
-          <EuiModal onClose={this.closeModal}>
-            <EuiModalHeader>
-              <EuiModalHeaderTitle>What to do ?</EuiModalHeaderTitle>
-            </EuiModalHeader>
+      if (this.state.fileUploadView === false) {
+        modal = (
+          <EuiOverlayMask>
+            <EuiModal onClose={this.closeModal}>
+              <EuiModalHeader>
+                <EuiModalHeaderTitle>What to do ?</EuiModalHeaderTitle>
+              </EuiModalHeader>
 
-            <EuiModalBody>
-              <EuiFlexGroup>
-                <EuiFlexItem>
-                  <EuiFlexItem key={1}>
-                    <EuiCard
-                      icon={<EuiIcon size="xxl" type="notebookApp" />}
-                      title={`Start Meeting`}
-                      isDisabled={false}
-                      description="Click to start Meeting and being Awesome."
-                      onClick={() => window.alert("Card clicked")}
+              <EuiModalBody>
+                <EuiFlexGroup>
+                  <EuiFlexItem>
+                    <EuiFlexItem key={1} grow={true}>
+                      <EuiCard
+                        icon={<EuiIcon size="xxl" type="notebookApp" />}
+                        title={`Start Meeting`}
+                        isDisabled={false}
+                        description="Click to start Meeting and being Awesome."
+                        onClick={() => window.alert("Card clicked")}
+                      />
+                    </EuiFlexItem>
+                  </EuiFlexItem>
+                  <EuiFlexItem grow={true}>
+                    <EuiFilePicker
+                      id="asdf2"
+                      // multiple
+                      initialPromptText={
+                        <EuiFlexGroup>
+                          <EuiFlexItem>
+                            <EuiText textAlign="center">
+                              <h3> Drop file to get transcribe</h3>
+                            </EuiText>
+
+                            <EuiSpacer size="s" />
+                            <h6>
+                              Get awesome transcibe and analysis from audio
+                            </h6>
+                          </EuiFlexItem>
+                        </EuiFlexGroup>
+                      }
+                      onChange={files => {
+                        this.onChangeFile(files);
+                      }}
+                      display="large"
                     />
                   </EuiFlexItem>
-                </EuiFlexItem>
-                <EuiFlexItem grow={true}>
-                  <EuiFilePicker
-                    id="asdf2"
-                    multiple
-                    initialPromptText={
-                      <>
-                      <EuiText>
-                       
-                       <h4> Drop file to get transcribe</h4>
-                     </EuiText>
+                </EuiFlexGroup>
+              </EuiModalBody>
 
-                     <EuiSpacer size='sm'/>
-                     <h6> Get awesome transcibe and analysis from audio</h6>
-                      </>
+              {/* <EuiModalFooter>
+                  <EuiButtonEmpty onClick={this.closeModal}>Cancel</EuiButtonEmpty>
+    
+                  <EuiButton onClick={this.closeModal} fill>
+                    Save
+                  </EuiButton>
+                </EuiModalFooter> */}
+            </EuiModal>
+          </EuiOverlayMask>
+        );
+      } else {
+        modal = (
+          <EuiOverlayMask>
+            <EuiModal onClose={this.closeModal}>
+              <EuiModalHeader>
+                <EuiModalHeaderTitle>
+                  <EuiFormControlLayout icon="pencil">
+                    <input
+                      type="text"
+                      placeholder="Please Add Meeting Name"
+                      value={this.state.meetingName}
+                      onChange={this.handleMeetingNameChange}
+                      className="euiFieldText"
+                      style={{ paddingLeft: "32px" }}
+                    />
+                  </EuiFormControlLayout>
+                </EuiModalHeaderTitle>
+              </EuiModalHeader>
 
-                    }
-                    onChange={files => {
-                      this.onChangeFile(files);
-                    }}
-                    display="large"
-                  />
-                </EuiFlexItem>
-              </EuiFlexGroup>
-            </EuiModalBody>
+              <EuiModalBody>
+                <EuiText>
+                  <h3> Transcribe From :</h3>
+                </EuiText>
 
-            {/* <EuiModalFooter>
-              <EuiButtonEmpty onClick={this.closeModal}>Cancel</EuiButtonEmpty>
+                <div style={{ wordWrap: "break-word" }}>
+                  {this.state.files[0].name}
+                </div>
+                
+                <EuiSpacer size="l" />
 
-              <EuiButton onClick={this.closeModal} fill>
-                Save
-              </EuiButton>
-            </EuiModalFooter> */}
-          </EuiModal>
-        </EuiOverlayMask>
-      );
+                <EuiProgress
+                  value={this.state.ProgressValue}
+                  max={100}
+                  size="xs"
+                />
+              </EuiModalBody>
+
+              <EuiModalFooter>
+                <EuiButtonEmpty
+                  onClick={() => {
+                    this.setState({ files: [], fileUploadView: false });
+                    this.closeModal();
+                  }}
+                >
+                  Cancel
+                </EuiButtonEmpty>
+
+                <EuiButton
+                  onClick={() => {
+                    // File Upload Fxn
+                    this.closeModal();
+                  }}
+                  fill
+                >
+                  Upload
+                </EuiButton>
+              </EuiModalFooter>
+            </EuiModal>
+          </EuiOverlayMask>
+        );
+      }
     }
     return (
       <div>
         <EuiFormRow label="Select a date">
           <EuiDatePicker
             selected={this.state.startDate}
-            onChange={this.handleChange}
+            onChange={this.handleDateChange}
             dateFormat="Do MMM YYYY"
           />
         </EuiFormRow>
