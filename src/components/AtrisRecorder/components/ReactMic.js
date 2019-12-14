@@ -491,14 +491,15 @@ export default class ReactMic extends Component {
                         recorder_state: recorderStates.processing
                       });
                       //currently moving to preview after 1 sec
-                      // setTimeout(
-                      //   function() {
-                      //     this.setState({
-                      //       recorder_state: recorderStates.preview
-                      //     });
-                      //   }.bind(this),
-                      //   1000
-                      // );
+                      setTimeout(
+                        function() {
+                          // this.setState({
+                          //   recorder_state: recorderStates.preview
+                          // });
+                          this.props.routeFxn();
+                        }.bind(this),
+                        1000
+                      );
                     } else if (
                       //condition for first time record state, we do allow mic and if it later allowed we do active state by callback
                       // we set isRecording true to start microphone.record fxn in canvasControls component

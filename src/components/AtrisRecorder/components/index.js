@@ -96,6 +96,7 @@ export default class AtrisRecorder extends Component {
       <ReactMic
       onData={this.onData}
       redirectAtEnd={"processing"} // redirect to processing or audioPlayer
+      routeFxn= {this.props.routeFxn}
         // onStop={this.onStop}
         // onStart={this.onStart}
         // onSave={this.onSave}

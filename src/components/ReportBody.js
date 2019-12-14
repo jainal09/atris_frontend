@@ -3,8 +3,9 @@ import AtrisRecorder from "./AtrisRecorder/components";
 import { EuiSpacer } from "@elastic/eui";
 import { EuiText } from "@elastic/eui";
 import { navigate } from "@reach/router";
+import AudioPlayer from "./AudioPlayer";
 
-export default class RecordBody extends Component {
+export default class ReportBody extends Component {
   constructor(props) {
     super(props);
   }
@@ -12,51 +13,57 @@ export default class RecordBody extends Component {
   render() {
     return (
       <div>
-        <AtrisRecorder
-          routeFxn={() => {
-            navigate("report");
-          }}
-        />
-
+        <AudioPlayer />
         <EuiSpacer size="l" />
-
         <EuiText> The transcribe of firt speech by atris hello world </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
+        <EuiText style={{ marginTop: "8px" }}>
+          I watched C-beams glitter in the dark near the Tannhäuser Gate All
+          those moments will be lost in time, like tears in rain. Time to die. I
+          watched C-beams glitter in the dark near the Tannhäuser Gate All those
+          moments will be lost in time, like tears in rain. Time to die. I
+          watched C-beams glitter in the dark near the Tannhäuser Gate All those
+          moments will be lost in time, like tears in rain. Time to die.
+        </EuiText>
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.
         </EuiText>
-
+        <EuiText style={{ marginTop: "8px" }}>
+          I watched C-beams glitter in the dark near the Tannhäuser Gate All
+          those moments will be lost in time, like tears in rain. Time to die.
+        </EuiText>
+        <EuiText style={{ marginTop: "8px" }}>
+          I watched C-beams glitter in the dark near the Tannhäuser Gate All
+          those moments will be lost in time, like tears in rain. Time to die.
+        </EuiText>
+        <EuiText style={{ marginTop: "8px" }}>
+          I watched C-beams glitter in the dark near the Tannhäuser Gate All
+          those moments will be lost in time, like tears in rain. Time to die.
+        </EuiText>
         <EuiText style={{ marginTop: "8px" }}>
           I watched C-beams glitter in the dark near the Tannhäuser Gate All
           those moments will be lost in time, like tears in rain. Time to die.

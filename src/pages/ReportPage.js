@@ -18,13 +18,11 @@ import {
   EuiFormControlLayout
 } from "@elastic/eui";
 import { EuiHeaderSectionItem } from "@elastic/eui";
-import HomeBody from "../components/HomeBody";
 
-import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "@reach/router";
-import RecordBody from "../components/RecordBody";
+import ReportBody from "../components/ReportBody";
 
-export default class ReportPage extends Component {
+export default class RecordPage extends Component {
   constructor(props) {
     super(props);
 
@@ -91,7 +89,7 @@ export default class ReportPage extends Component {
               </EuiPageContentHeaderSection>
             </EuiPageContentHeader>
             <EuiPageContentBody>
-              <RecordBody />
+              <ReportBody/>
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
