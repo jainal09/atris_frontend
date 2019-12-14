@@ -6,6 +6,7 @@ import RecordPage from "./pages/RecordPage";
 if (localStorage.getItem("theme") === "dark") {
   require('@elastic/eui/dist/eui_theme_dark.css');
 } else {
+  require('@elastic/eui/dist/eui_theme_dark.css');
   require('@elastic/eui/dist/eui_theme_light.css');
 }
 
