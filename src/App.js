@@ -3,7 +3,7 @@ import { Router, Link } from "@reach/router";
 import HomePage from "./pages/HomePage";
 import RecordPage from "./pages/RecordPage";
 
-require("@elastic/eui/dist/eui_theme_dark.css");
+import "@elastic/eui/dist/eui_theme_light.css";
 
 const setTheme = theme => {
   localStorage.setItem("theme", theme);
