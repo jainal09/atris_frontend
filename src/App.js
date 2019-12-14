@@ -5,10 +5,10 @@ import RecordPage from "./pages/RecordPage";
 
 import "@elastic/eui/dist/eui_theme_light.css";
 
-const setTheme = theme => {
-  localStorage.setItem("theme", theme);
-  window.location.reload();
-};
+// const setTheme = theme => {
+//   localStorage.setItem("theme", theme);
+//   window.location.reload();
+// };
 
 export default class App extends Component {
   componentWillMount() {
@@ -26,7 +26,9 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <HomePage path="/" setTheme={setTheme} />
+        <HomePage path="/" 
+        // setTheme={setTheme} 
+        />
         <RecordPage path="recording" />
       </Router>
     );
