@@ -20,15 +20,35 @@ import { EuiHeaderSectionItem } from "@elastic/eui";
 import HomeBody from "../components/HomeBody";
 
 import { FiPlusCircle } from "react-icons/fi";
+import { EuiSwitch } from "@elastic/eui";
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchValue: ""
+      searchValue: "",
+      themeSwitch: localStorage.getItem("ThemeSwitch") === "true"
     };
   }
+
+  changeTheme = e => {
+  
+
+    if (e.target.checked === false) {
+      console.log("light here", localStorage.getItem("ThemeSwitch"));
+
+      localStorage.setItem("ThemeSwitch", false);
+
+      this.props.setTheme("light");
+    } else {
+      console.log("dark here", localStorage.getItem("ThemeSwitch"));
+
+      localStorage.setItem("ThemeSwitch", true);
+
+      this.props.setTheme("dark");
+    }
+  };
 
   searchValueChange = e => {
     this.setState({
@@ -70,11 +90,15 @@ export default class HomePage extends Component {
             <EuiPageContentHeader>
               <EuiPageContentHeaderSection>
                 <EuiTitle>
-                  <h2>My First Meeting in WOrkd</h2>
+                  <h2>My Home</h2>
                 </EuiTitle>
               </EuiPageContentHeaderSection>
               <EuiPageContentHeaderSection>
-                Theme swithcher
+                <EuiSwitch
+                  label="light/dark"
+                  checked={this.state.themeSwitch}
+                  onChange={this.changeTheme}
+                />
               </EuiPageContentHeaderSection>
             </EuiPageContentHeader>
             <EuiPageContentBody>
@@ -82,7 +106,6 @@ export default class HomePage extends Component {
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
-
       </EuiPage>
     );
   }

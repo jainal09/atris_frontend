@@ -79,7 +79,7 @@ export default class RecordPage extends Component {
                     className="euiFieldText"
                     style={{
                       paddingLeft: "32px",
-                      color: "#1a1c21",
+                      // color: "#1a1c21",
                       fontSize: "1.75rem",
                       fontWeight: "100",
                       letterSpacing: "-0.04em",
