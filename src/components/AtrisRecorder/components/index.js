@@ -24,7 +24,12 @@ export default class AtrisRecorder extends Component {
    * This function establishes the connect with the websocket and also ensures constant reconnection if connection closes
    */
   connect = () => {
-    var ws = new WebSocket("ws://192.168.43.254:8060/ws");
+    // try {
+    //   var ws = new WebSocket("ws://192.168.43.254:8070/ws");
+    // } catch (error) {
+    //   console.log(error); // catch error
+    // }
+    var ws = new WebSocket("ws://192.168.43.254:8070/ws");
     let that = this; // cache the this
     var connectInterval;
 
@@ -89,7 +94,11 @@ export default class AtrisRecorder extends Component {
   onData = recordedBlob => {
     console.log("ONDATA CALL IS BEING CALLED! ", recordedBlob);
     this.sendMessage(recordedBlob);
-    console.log(recordedBlob,"qqq qq");
+    console.log(recordedBlob, "qqq qq");
+  };
+
+  onStop = recordedBlob => {
+    this.sendMessage(recordedBlob);
   };
 
   render() {
@@ -98,7 +107,7 @@ export default class AtrisRecorder extends Component {
         onData={this.onData}
         redirectAtEnd={"processing"} // redirect to processing or audioPlayer
         routeFxn={this.props.routeFxn}
-        // onStop={this.onStop}
+        onStop={this.onStop}
         // onStart={this.onStart}
         // onSave={this.onSave}
         // onBlock={this.onBlock}

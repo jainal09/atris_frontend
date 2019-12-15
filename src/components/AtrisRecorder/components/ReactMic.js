@@ -60,6 +60,9 @@ export default class ReactMic extends Component {
   onStop = blobObject => {
     let blobURL = window.URL.createObjectURL(blobObject);
     this.setState({ blobURL: blobURL });
+
+    this.props.onStop(blobObject) // send complete audio blob to server by ws
+
     blobToArrayBuffer(blobObject)
       .then(function(arrayBuff) {
         console.log(arrayBuff, "xxx xx ");
@@ -149,7 +152,7 @@ export default class ReactMic extends Component {
         audioPlayer_startedAt: Date.now()
       });
 
-      console.log("xxx 111", this.state.audioPlayer_pausedAt);
+      // console.log("xxx 111", this.state.audioPlayer_pausedAt);
 
       let playTimeOffset = this.state.audioPlayer_pausedAt / 1000;
       Visualizer.playerSineWave(
@@ -248,8 +251,7 @@ export default class ReactMic extends Component {
   };
 
   componentDidMount = () => {
-    console.log(this.state.totalTimerSeconds, "wee");
-  };
+   };
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.recorder_state !== this.state.recorder_state) {

@@ -106,6 +106,8 @@ export class MicrophoneRecorder {
               mediaRecorder = new MediaStreamRecorder(str);
             }
             mediaRecorder.mimeType = "audio/wav";
+            mediaRecorder.audioChannels = 1;
+
 
             if (onStartCallback) {
               onStartCallback();

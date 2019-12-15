@@ -14,7 +14,7 @@ export default class RecordBody extends Component {
       <div>
         <AtrisRecorder
           routeFxn={() => {
-            navigate("report");
+            // navigate("report");
           }}
         />
 
