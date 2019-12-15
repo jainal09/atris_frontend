@@ -28,8 +28,8 @@ import ReportBody from "../components/ReportBody";
 import { EuiIcon } from "@elastic/eui";
 import { EuiFlyout } from "@elastic/eui";
 import { EuiTreeView } from "@elastic/eui";
-import TreeSelect from "../components/TreeSelect";
-
+import TreeSelect from "../components/TreeSelect/TreeSelect";
+ 
 export default class RecordPage extends Component {
   constructor(props) {
     super(props);
@@ -94,7 +94,7 @@ export default class RecordPage extends Component {
             </EuiText>
 
             <div style={{ width: "20rem" }}>
-            <TreeSelect />
+            <TreeSelect/>
             </div>
           </EuiFlyoutBody>
         </EuiFlyout>

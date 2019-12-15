@@ -14,7 +14,7 @@ export default class AtrisRecorder extends Component {
   }
 
   componentDidMount() {
-    // this.connect();
+    this.connect();
   }
 
   timeout = 250; // Initial timeout duration as a class variable
@@ -24,7 +24,7 @@ export default class AtrisRecorder extends Component {
    * This function establishes the connect with the websocket and also ensures constant reconnection if connection closes
    */
   connect = () => {
-    var ws = new WebSocket("ws://127.0.0.1:8000/ws/");
+    var ws = new WebSocket("ws://192.168.43.254:8060/ws");
     let that = this; // cache the this
     var connectInterval;
 
@@ -88,15 +88,16 @@ export default class AtrisRecorder extends Component {
 
   onData = recordedBlob => {
     console.log("ONDATA CALL IS BEING CALLED! ", recordedBlob);
-    // this.sendMessage(recordedBlob);
+    this.sendMessage(recordedBlob);
+    console.log(recordedBlob,"qqq qq");
   };
 
   render() {
     return (
       <ReactMic
-      onData={this.onData}
-      redirectAtEnd={"processing"} // redirect to processing or audioPlayer
-      routeFxn= {this.props.routeFxn}
+        onData={this.onData}
+        redirectAtEnd={"processing"} // redirect to processing or audioPlayer
+        routeFxn={this.props.routeFxn}
         // onStop={this.onStop}
         // onStart={this.onStart}
         // onSave={this.onSave}
@@ -106,5 +107,3 @@ export default class AtrisRecorder extends Component {
     );
   }
 }
-
- 
