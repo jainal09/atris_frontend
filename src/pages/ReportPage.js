@@ -15,12 +15,20 @@ import {
   EuiFieldSearch,
   EuiHeaderSection,
   EuiSpacer,
-  EuiFormControlLayout
+  EuiFormControlLayout,
+  EuiFlyoutHeader,
+  EuiFlyoutBody,
+  EuiText
 } from "@elastic/eui";
 import { EuiHeaderSectionItem } from "@elastic/eui";
+import HomeBody from "../components/HomeBody";
 
 import { Link } from "@reach/router";
 import ReportBody from "../components/ReportBody";
+import { EuiIcon } from "@elastic/eui";
+import { EuiFlyout } from "@elastic/eui";
+import { EuiTreeView } from "@elastic/eui";
+import TreeSelect from "../components/TreeSelect";
 
 export default class RecordPage extends Component {
   constructor(props) {
@@ -28,7 +36,9 @@ export default class RecordPage extends Component {
 
     this.state = {
       searchValue: "",
-      meetingName: "My Awesome Meeting"
+      meetingName: "My Awesome Meeting",
+      isFlyoutVisible: false,
+      isSwitchChecked: true
     };
   }
 
@@ -44,7 +54,52 @@ export default class RecordPage extends Component {
     });
   };
 
+  onSwitchChange = () => {
+    this.setState({
+      isSwitchChecked: !this.state.isSwitchChecked
+    });
+  };
+
+  closeFlyout = () => {
+    this.setState({ isFlyoutVisible: false });
+  };
+
+  showFlyout = () => {
+    this.setState({ isFlyoutVisible: true });
+  };
+
+  entitySelectCallback = () => {};
+
   render() {
+   
+    let flyout;
+    if (this.state.isFlyoutVisible) {
+      flyout = (
+        <EuiFlyout
+          ownFocus
+          onClose={this.closeFlyout}
+          size="s"
+          aria-labelledby="flyoutSmallTitle"
+        >
+          <EuiFlyoutHeader>
+            <EuiTitle size="s">
+              <h2 id="flyoutSmallTitle">Entity Selection</h2>
+            </EuiTitle>
+          </EuiFlyoutHeader>
+          <EuiFlyoutBody>
+            <EuiText>
+              <p>
+                Select the required entites to get an awesome visualization 😉
+              </p>
+            </EuiText>
+
+            <div style={{ width: "20rem" }}>
+            <TreeSelect />
+            </div>
+          </EuiFlyoutBody>
+        </EuiFlyout>
+      );
+    }
     return (
       <EuiPage style={{ height: "100vh" }}>
         {/* <EuiPageSideBar>SideBar nav</EuiPageSideBar> */}
@@ -87,9 +142,17 @@ export default class RecordPage extends Component {
                   />
                 </EuiFormControlLayout>
               </EuiPageContentHeaderSection>
+              <EuiPageContentHeaderSection>
+                <EuiIcon
+                  style={{}}
+                  type="arrowLeft"
+                  onClick={this.showFlyout}
+                />
+              </EuiPageContentHeaderSection>
             </EuiPageContentHeader>
             <EuiPageContentBody>
-              <ReportBody/>
+              {flyout}
+              <ReportBody />
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
