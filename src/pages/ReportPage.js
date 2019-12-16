@@ -29,7 +29,7 @@ import { EuiIcon } from "@elastic/eui";
 import { EuiFlyout } from "@elastic/eui";
 import { EuiTreeView } from "@elastic/eui";
 import TreeSelect from "../components/TreeSelect/TreeSelect";
- 
+
 export default class RecordPage extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +38,8 @@ export default class RecordPage extends Component {
       searchValue: "",
       meetingName: "My Awesome Meeting",
       isFlyoutVisible: false,
-      isSwitchChecked: true
+      isSwitchChecked: true,
+      annotateValue: []
     };
   }
 
@@ -70,8 +71,13 @@ export default class RecordPage extends Component {
 
   entitySelectCallback = () => {};
 
+  setAnnotateValue = value => {
+    this.setState({
+      annotateValue: value
+    });
+  };
+
   render() {
-   
     let flyout;
     if (this.state.isFlyoutVisible) {
       flyout = (
@@ -92,9 +98,12 @@ export default class RecordPage extends Component {
                 Select the required entites to get an awesome visualization 😉
               </p>
             </EuiText>
-
+            <EuiSpacer size="m" />
             <div style={{ width: "20rem" }}>
-            <TreeSelect/>
+              <TreeSelect
+                setAnnotateValue={this.setAnnotateValue}
+                annotateValue={this.state.annotateValue}
+              />
             </div>
           </EuiFlyoutBody>
         </EuiFlyout>
@@ -152,7 +161,7 @@ export default class RecordPage extends Component {
             </EuiPageContentHeader>
             <EuiPageContentBody>
               {flyout}
-              <ReportBody />
+              <ReportBody annotateValue={this.state.annotateValue} />
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>
