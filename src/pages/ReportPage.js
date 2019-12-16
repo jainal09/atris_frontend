@@ -39,9 +39,16 @@ export default class RecordPage extends Component {
       meetingName: "My Awesome Meeting",
       isFlyoutVisible: false,
       isSwitchChecked: true,
-      annotateValue: []
+      annotateValue: [],
+      checked: [],
+      expanded: ["/ENTITIES"],
+      tree_node: []
     };
   }
+
+ getReportPageThis = ()=>{
+   return this
+ }
 
   searchValueChange = e => {
     this.setState({
@@ -103,6 +110,7 @@ export default class RecordPage extends Component {
               <TreeSelect
                 setAnnotateValue={this.setAnnotateValue}
                 annotateValue={this.state.annotateValue}
+                getReportPageThis={this.getReportPageThis}
               />
             </div>
           </EuiFlyoutBody>

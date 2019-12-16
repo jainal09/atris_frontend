@@ -20,6 +20,11 @@ export default class ReportBody extends Component {
     tag: "default tag"
   };
 
+  componentWillReceiveProps(props) {
+    console.log("new Props");
+    this.setState({ value: props.annotateValue });
+  }
+
   handleChange = value => {
     this.setState({ value });
   };
