@@ -41,7 +41,7 @@ export default class RecordPage extends Component {
       isSwitchChecked: true,
       annotateValue: [],
       checked: [],
-      expanded: ["/ENTITIES"],
+      expanded: ["/ENTITIES/"],
       tree_node: []
     };
   }

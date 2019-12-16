@@ -26,7 +26,7 @@ export default class ReportBody extends Component {
   }
 
   handleChange = value => {
-    this.setState({ value });
+    // this.setState({ value });
   };
 
   render() {

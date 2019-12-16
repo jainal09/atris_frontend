@@ -360,6 +360,7 @@ export default class TreeSelect extends Component {
         onExpand={this.onExpand}
         showNodeIcon={false}
         expandOnClick={true}
+       
         onClick={() => {
           console.log("click");
         }}
