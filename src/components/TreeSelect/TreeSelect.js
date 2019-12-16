@@ -343,7 +343,7 @@ export default class TreeSelect extends Component {
     });
 
     this.reportThis.setState({
-      tree_node: new_node
+      tree_node: entities_node_children
     });
   };
 
