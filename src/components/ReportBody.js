@@ -61,40 +61,7 @@ export default class ReportBody extends Component {
                 color: TAG_COLORS[this.state.tag]
               })}
             />
-             <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText> <EuiText>
-               
-               The transcribe of firt speech by atris hello world 
-             </EuiText>
+              
           </div>
         </EuiFlexItem>
         {/* <EuiFlexItem

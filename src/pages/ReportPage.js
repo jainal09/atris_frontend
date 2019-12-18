@@ -29,7 +29,9 @@ import {
   EuiFlyoutHeader,
   EuiText,
   EuiSpacer,
-  EuiFormControlLayout
+  EuiFormControlLayout,
+  EuiFlexGroup,
+  EuiFlexItem
 } from "@elastic/eui";
 import { Link } from "@reach/router";
 import AudioPlayer from "../components/AudioPlayer";
@@ -52,7 +54,8 @@ export default class App extends Component {
       annotateValue: [],
       checked: [],
       expanded: ["/ENTITIES/"],
-      tree_node: []
+      tree_node: [],
+      isRightSidebar: true
     };
 
     this.nonExpandLinks = [
@@ -174,15 +177,35 @@ export default class App extends Component {
     });
   };
 
-  closeFlyout = () => {
-    this.setState({ isFlyoutVisible: false });
-  };
+  // closeFlyout = () => {
+  //   this.setState({ isFlyoutVisible: false });
+  // };
 
   showFlyout = () => {
     this.setState({ isFlyoutVisible: true }, () => {
       document.getElementsByClassName("euiOverlayMask")[0].style.background =
         "none";
     });
+  };
+
+  toggleRightSidebar = () => {
+    let { isRightSidebar } = this.state;
+    let responsiveWave = window.responsiveWave;
+    if (isRightSidebar) {
+      this.setState(
+        {
+          isRightSidebar: false
+        },
+        responsiveWave
+      );
+    } else {
+      this.setState(
+        {
+          isRightSidebar: true
+        },
+        responsiveWave
+      );
+    }
   };
 
   entitySelectCallback = () => {};
@@ -232,138 +255,180 @@ export default class App extends Component {
     }
     return (
       <>
-        <div
-          style={{
-            // position: "fixed",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: "100%"
-          }}
-        >
-          <EuiPageHeader
-            responsive={false}
-            id="reportPageHeader"
-            style={{
-              position: "fixed",
-              padding: "0 !important",
-              top: "0",
-              left: "0",
-              right: "0",
-              backgroundColor: "white",
-              zIndex: "1"
-            }}
-          >
-            <EuiPageHeaderSection>
-              <EuiShowFor sizes={["xs", "s"]}>
-                <EuiHeaderSectionItem
-                  border="right"
-                  style={{
-                    display: "flex !important",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  {this.renderMenuTrigger()}
-                  {this.renderLogo()} Atris
-                </EuiHeaderSectionItem>
-              </EuiShowFor>
+        <EuiFlexGroup gutterSize="none">
+          <EuiFlexItem>
+            <div
+              style={{
+                // position: "fixed",
+                top: 0,
+                left: 0,
+                height: "100%",
+                width: "100%"
+              }}
+            >
+              <EuiPageHeader
+                responsive={false}
+                id="reportPageHeader"
+                style={{
+                  position: "fixed",
+                  padding: "0 !important",
+                  top: "0",
+                  left: "0",
+                  right: "0",
+                  backgroundColor: "white",
+                  zIndex: "5"
+                }}
+              >
+                <EuiPageHeaderSection>
+                  <EuiShowFor sizes={["xs", "s"]}>
+                    <EuiHeaderSectionItem
+                      border="right"
+                      style={{
+                        display: "flex !important",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      {this.renderMenuTrigger()}
+                      {this.renderLogo()} Atris
+                    </EuiHeaderSectionItem>
+                  </EuiShowFor>
 
-              <EuiShowFor sizes={["m", "l", "xl"]}>
-                <EuiHeaderSectionItem>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    {this.renderLogo()}
-                    <Link to="/" style={{ marginLeft: "8px" }}>
-                      <EuiTitle size="l">
-                        <h1>Atris</h1>
-                      </EuiTitle>
-                    </Link>
-                  </div>
-                </EuiHeaderSectionItem>
-              </EuiShowFor>
-            </EuiPageHeaderSection>
+                  <EuiShowFor sizes={["m", "l", "xl"]}>
+                    <EuiHeaderSectionItem>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center"
+                        }}
+                      >
+                        {this.renderLogo()}
+                        <Link to="/" style={{ marginLeft: "8px" }}>
+                          <EuiTitle size="l">
+                            <h1>Atris</h1>
+                          </EuiTitle>
+                        </Link>
+                      </div>
+                    </EuiHeaderSectionItem>
+                  </EuiShowFor>
+                </EuiPageHeaderSection>
 
-            <EuiHeaderSection side="right">
-              <EuiHeaderSectionItem>
-                <HeaderUserMenu />
-              </EuiHeaderSectionItem>
-            </EuiHeaderSection>
-          </EuiPageHeader>
-          <EuiNavDrawer
-            ref={ref => {
-              this.navDrawerRef = ref;
-            }}
-            showExpandButton={true}
-          >
-            <EuiNavDrawerGroup listItems={this.nonExpandLinks} />
-            <EuiHorizontalRule margin="none" />
-            <EuiNavDrawerGroup listItems={this.ExpandLinks} />
-          </EuiNavDrawer>
-          <EuiPage className="euiNavDrawerPage">
-            <EuiPageBody className="euiNavDrawerPage__pageBody">
-              <EuiPageHeader>
-                <EuiPageHeaderSection
-                  style={{
-                    width: "100%",
-                    marginTop: "40px"
-                  }}
-                >
-                  {/* <EuiTitle size="l">
+                <EuiHeaderSection side="right">
+                  <EuiHeaderSectionItem>
+                    <HeaderUserMenu />
+                  </EuiHeaderSectionItem>
+                </EuiHeaderSection>
+              </EuiPageHeader>
+              <EuiNavDrawer
+                ref={ref => {
+                  this.navDrawerRef = ref;
+                }}
+                showExpandButton={true}
+              >
+                <EuiNavDrawerGroup listItems={this.nonExpandLinks} />
+                <EuiHorizontalRule margin="none" />
+                <EuiNavDrawerGroup listItems={this.ExpandLinks} />
+              </EuiNavDrawer>
+              <EuiPage className="euiNavDrawerPage">
+                <EuiPageBody className="euiNavDrawerPage__pageBody">
+                  <EuiPageHeader>
+                    <EuiPageHeaderSection
+                      style={{
+                        width: "100%",
+                        marginTop: "40px"
+                      }}
+                    >
+                      {/* <EuiTitle size="l">
                     <h1>Page title</h1>
                   </EuiTitle> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      marginBottom: "8px"
-                    }}
-                  >
-                    <EuiIcon
-                      style={{}}
-                      type="arrowLeft"
-                      onClick={this.showFlyout}
-                    />
-                  </div>
-                  <AudioPlayer />
-                </EuiPageHeaderSection>
-              </EuiPageHeader>
-              <EuiPageContent>
-                <EuiPageContentHeader>
-                  <EuiPageContentHeaderSection>
-                    <EuiFormControlLayout icon="pencil">
-                      <input
-                        type="text"
-                        placeholder="Please Add Meeting Name"
-                        value={this.state.meetingName}
-                        onChange={this.handleMeetingNameChange}
-                        className="euiFieldText"
+                      <div
                         style={{
-                          paddingLeft: "32px",
-                          // color: "#1a1c21",
-                          fontSize: "1.75rem",
-                          fontWeight: "100",
-                          letterSpacing: "-0.04em",
-                          fontFamily: "inherit",
-                          boxShadow: "none"
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          marginBottom: "8px"
                         }}
-                      />
-                    </EuiFormControlLayout>
-                  </EuiPageContentHeaderSection>
-                </EuiPageContentHeader>
-                <EuiPageContentBody>
-                  {flyout}
-                  <ReportBody annotateValue={this.state.annotateValue} />
-                </EuiPageContentBody>
-              </EuiPageContent>
-            </EuiPageBody>
-          </EuiPage>
-        </div>
+                      >
+                        <EuiShowFor sizes={["xs", "s"]}>
+                          <EuiIcon
+                            style={{}}
+                            type="arrowLeft"
+                            onClick={this.showFlyout}
+                          />
+                        </EuiShowFor>
+                        <EuiShowFor sizes={["m", "l", "xl"]}>
+                          {!this.state.isRightSidebar && (
+                            <EuiIcon
+                              style={{}}
+                              type="arrowLeft"
+                              onClick={this.toggleRightSidebar}
+                            />
+                          )}
+                        </EuiShowFor>
+                      </div>
+                      <AudioPlayer />
+                    </EuiPageHeaderSection>
+                  </EuiPageHeader>
+                  <EuiPageContent>
+                    <EuiPageContentHeader>
+                      <EuiPageContentHeaderSection>
+                        <EuiFormControlLayout icon="pencil">
+                          <input
+                            type="text"
+                            placeholder="Please Add Meeting Name"
+                            value={this.state.meetingName}
+                            onChange={this.handleMeetingNameChange}
+                            className="euiFieldText"
+                            style={{
+                              paddingLeft: "32px",
+                              // color: "#1a1c21",
+                              fontSize: "1.75rem",
+                              fontWeight: "100",
+                              letterSpacing: "-0.04em",
+                              fontFamily: "inherit",
+                              boxShadow: "none"
+                            }}
+                          />
+                        </EuiFormControlLayout>
+                      </EuiPageContentHeaderSection>
+                    </EuiPageContentHeader>
+                    <EuiPageContentBody>
+                      {flyout}
+                      <ReportBody annotateValue={this.state.annotateValue} />
+                    </EuiPageContentBody>
+                  </EuiPageContent>
+                </EuiPageBody>
+              </EuiPage>
+            </div>
+          </EuiFlexItem>
+          {this.state.isRightSidebar ? (
+            <EuiFlexItem
+              grow={false}
+              style={{
+                width: "250px",
+                marginTop: "60px"
+              }}
+            >
+              <div>
+                <EuiIcon type="arrowRight" onClick={this.toggleRightSidebar} />
+                <EuiText>
+                  <p>
+                    Select the required entites to get an awesome visualization
+                    😉
+                  </p>
+                </EuiText>
+                <EuiSpacer size="m" />
+                <div style={{ width: "20rem" }}>
+                  <TreeSelect
+                    setAnnotateValue={this.setAnnotateValue}
+                    annotateValue={this.state.annotateValue}
+                    getReportPageThis={this.getReportPageThis}
+                  />
+                </div>
+              </div>
+            </EuiFlexItem>
+          ) : null}
+        </EuiFlexGroup>
       </>
     );
   }

@@ -177,7 +177,7 @@ export default class AudioPlayer extends Component {
     let responsiveWave = this.wavesurfer.util.debounce(() => {
       this.wavesurfer.drawBuffer();
     }, 150);
-
+    window.responsiveWave = responsiveWave;
     window.addEventListener("resize", responsiveWave);
   };
 
