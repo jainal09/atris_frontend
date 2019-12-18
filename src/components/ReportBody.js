@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AtrisRecorder from "./AtrisRecorder/components";
 import { EuiSpacer } from "@elastic/eui";
-import { EuiText } from "@elastic/eui";
+import { EuiText, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { navigate } from "@reach/router";
 import { TextAnnotator } from "react-text-annotate";
 
@@ -31,30 +31,83 @@ export default class ReportBody extends Component {
 
   render() {
     return (
-      <div>
-        <AudioPlayer />
-        <EuiSpacer size="l" />
-        <EuiText> The transcribe of firt speech by atris hello world </EuiText>
-        <EuiText style={{ marginTop: "8px" }}>
-          I watched C-beams glitter in the dark near the Tannhäuser Gate All
-          those moments will be lost in time, like tears in rain. Time to die.
-        </EuiText>
-        <TextAnnotator
-          style={{
-            // fontFamily: "IBM Plex Sans",
-            // maxWidth: 500,
-            lineHeight: 1.5
-          }}
-          content={TEXT}
-          value={this.state.value}
-          onChange={this.handleChange}
-          getSpan={span => ({
-            ...span,
-            tag: this.state.tag,
-            color: TAG_COLORS[this.state.tag]
-          })}
-        />
-      </div>
+      <EuiFlexGroup>
+        <EuiFlexItem>
+          {" "}
+          <div>
+            {/* <AudioPlayer /> */}
+           
+            <EuiText>
+               
+              The transcribe of firt speech by atris hello world 
+            </EuiText>
+            <EuiText style={{ marginTop: "8px" }}>
+              I watched C-beams glitter in the dark near the Tannhäuser Gate All
+              those moments will be lost in time, like tears in rain. Time to
+              die.
+            </EuiText>
+            <TextAnnotator
+              style={{
+                // fontFamily: "IBM Plex Sans",
+                // maxWidth: 500,
+                lineHeight: 1.5
+              }}
+              content={TEXT}
+              value={this.state.value}
+              onChange={this.handleChange}
+              getSpan={span => ({
+                ...span,
+                tag: this.state.tag,
+                color: TAG_COLORS[this.state.tag]
+              })}
+            />
+             <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText> <EuiText>
+               
+               The transcribe of firt speech by atris hello world 
+             </EuiText>
+          </div>
+        </EuiFlexItem>
+        {/* <EuiFlexItem
+          style={{ minWidth: "384px", width: "25vw", flexBasis: "auto" }}
+        >
+          <p>Another content grid item</p>
+          <EuiSpacer />
+          <p>
+            Note how both of these are the same width and height despite having
+            different content?
+          </p>
+        </EuiFlexItem> */}
+      </EuiFlexGroup>
     );
   }
 }
