@@ -177,9 +177,9 @@ export default class App extends Component {
     });
   };
 
-  // closeFlyout = () => {
-  //   this.setState({ isFlyoutVisible: false });
-  // };
+  closeFlyout = () => {
+    this.setState({ isFlyoutVisible: false });
+  };
 
   showFlyout = () => {
     this.setState({ isFlyoutVisible: true }, () => {
