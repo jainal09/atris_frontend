@@ -36,10 +36,9 @@ export default class ReportBody extends Component {
           {" "}
           <div>
             {/* <AudioPlayer /> */}
-           
+
             <EuiText>
-               
-              The transcribe of firt speech by atris hello world 
+              The transcribe of firt speech by atris hello world
             </EuiText>
             <EuiText style={{ marginTop: "8px" }}>
               I watched C-beams glitter in the dark near the Tannhäuser Gate All
@@ -61,7 +60,43 @@ export default class ReportBody extends Component {
                 color: TAG_COLORS[this.state.tag]
               })}
             />
-              
+
+            <EuiText>
+              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+            </EuiText>
+            <EuiText>
+              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+            </EuiText>
+            <EuiText>
+              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+            </EuiText>
+            <EuiText>
+              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+            </EuiText>
+
+            <EuiText>
+              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello world
+            </EuiText>
           </div>
         </EuiFlexItem>
         {/* <EuiFlexItem

@@ -41,6 +41,7 @@ import { FaHeart } from "react-icons/fa";
 
 import ReportBody from "../components/ReportBody";
 import TreeSelect from "../components/TreeSelect/TreeSelect";
+import { EuiPanel } from "@elastic/eui";
 
 export default class App extends Component {
   constructor(props) {
@@ -55,7 +56,8 @@ export default class App extends Component {
       checked: [],
       expanded: ["/ENTITIES/"],
       tree_node: [],
-      isRightSidebar: true
+      isRightSidebar: true,
+      isMobile:true
     };
 
     this.nonExpandLinks = [
@@ -218,7 +220,14 @@ export default class App extends Component {
 
   componentDidMount() {
     document.getElementById("reportPageHeader").style.padding = "0";
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+    window.responsiveWave();
   }
+
+  resize() {
+    this.setState({isMobile: window.innerWidth <= 760});
+}
 
   render() {
     let flyout;
@@ -352,7 +361,7 @@ export default class App extends Component {
                         <EuiShowFor sizes={["xs", "s"]}>
                           <EuiIcon
                             style={{}}
-                            type="arrowLeft"
+                            type="menuLeft"
                             onClick={this.showFlyout}
                           />
                         </EuiShowFor>
@@ -360,7 +369,7 @@ export default class App extends Component {
                           {!this.state.isRightSidebar && (
                             <EuiIcon
                               style={{}}
-                              type="arrowLeft"
+                              type="menuLeft"
                               onClick={this.toggleRightSidebar}
                             />
                           )}
@@ -401,16 +410,20 @@ export default class App extends Component {
               </EuiPage>
             </div>
           </EuiFlexItem>
-          {this.state.isRightSidebar ? (
+          {!this.state.isMobile && this.state.isRightSidebar ? (
             <EuiFlexItem
               grow={false}
               style={{
                 width: "250px",
-                marginTop: "60px"
+                marginTop: "60px",
+                marginBottom:"16px"
               }}
             >
-              <div>
-                <EuiIcon type="arrowRight" onClick={this.toggleRightSidebar} />
+              <EuiPanel style={{
+                position:"fixed",
+                height:"100vh"
+              }}>
+                <EuiIcon type="menuRight" onClick={this.toggleRightSidebar} />
                 <EuiText>
                   <p>
                     Select the required entites to get an awesome visualization
@@ -425,7 +438,7 @@ export default class App extends Component {
                     getReportPageThis={this.getReportPageThis}
                   />
                 </div>
-              </div>
+              </EuiPanel>
             </EuiFlexItem>
           ) : null}
         </EuiFlexGroup>
