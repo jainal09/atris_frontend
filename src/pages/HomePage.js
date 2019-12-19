@@ -31,19 +31,19 @@ export default class HomePage extends Component {
   }
 
   changeTheme = e => {
-    // if (e.target.checked === false) {
-    //   console.log("light here", localStorage.getItem("ThemeSwitch"));
+    if (e.target.checked === false) {
+      console.log("light here", localStorage.getItem("ThemeSwitch"));
 
-    //   localStorage.setItem("ThemeSwitch", false);
+      localStorage.setItem("ThemeSwitch", false);
 
-    //   this.props.setTheme("light");
-    // } else {
-    //   console.log("dark here", localStorage.getItem("ThemeSwitch"));
+      this.props.setTheme("light");
+    } else {
+      console.log("dark here", localStorage.getItem("ThemeSwitch"));
 
-    //   localStorage.setItem("ThemeSwitch", true);
+      localStorage.setItem("ThemeSwitch", true);
 
-    //   this.props.setTheme("dark");
-    // }
+      this.props.setTheme("dark");
+    }
   };
 
   searchValueChange = e => {
