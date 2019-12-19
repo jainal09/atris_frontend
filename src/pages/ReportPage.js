@@ -31,17 +31,32 @@ import {
   EuiSpacer,
   EuiFormControlLayout,
   EuiFlexGroup,
-  EuiFlexItem
+  EuiFlexItem,
+  EuiBadge
 } from "@elastic/eui";
 import { Link } from "@reach/router";
 import AudioPlayer from "../components/AudioPlayer";
 import HeaderUserMenu from "../components/header_user_menu.js";
 
 import { FaHeart } from "react-icons/fa";
+import { FiCalendar, FiClock } from "react-icons/fi";
 
 import ReportBody from "../components/ReportBody";
 import TreeSelect from "../components/TreeSelect/TreeSelect";
 import { EuiPanel } from "@elastic/eui";
+
+
+const badges = [
+  "default",
+  "hollow",
+  "primary",
+  "secondary",
+  "accent",
+  "warning",
+  "danger",
+  "#000",
+  "#fea27f"
+];
 
 export default class App extends Component {
   constructor(props) {
@@ -57,7 +72,7 @@ export default class App extends Component {
       expanded: ["/ENTITIES/"],
       tree_node: [],
       isRightSidebar: true,
-      isMobile:true
+      isMobile: true
     };
 
     this.nonExpandLinks = [
@@ -226,8 +241,8 @@ export default class App extends Component {
   }
 
   resize() {
-    this.setState({isMobile: window.innerWidth <= 760});
-}
+    this.setState({ isMobile: window.innerWidth <= 760 });
+  }
 
   render() {
     let flyout;
@@ -399,6 +414,45 @@ export default class App extends Component {
                             }}
                           />
                         </EuiFormControlLayout>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "12px"
+                          }}
+                        >
+                          <FiCalendar
+                            style={{
+                              height: "17px",
+                              width: "17px"
+                            }}
+                          />
+                          <span style={{ marginLeft: "0.25rem" }}>
+                            {"21th Dec 2019"}
+                          </span>
+
+                          <FiClock
+                            style={{
+                              height: "17px",
+                              width: "17px",
+                              marginLeft: "1.2rem"
+                            }}
+                          />
+
+                          <span style={{ marginLeft: "0.25rem" }}>
+                            {"3:26"}
+                          </span>
+                        </div>
+                        <EuiFlexGroup wrap responsive={false} gutterSize="xs" style={{
+                          marginTop:"8px",
+                          marginLeft:"12px"
+                        }}>
+                          {badges.map(badge => (
+                            <EuiFlexItem grow={false} key={badge}>
+                              <EuiBadge color={"#c7c7c7"}>{badge}</EuiBadge>
+                            </EuiFlexItem>
+                          ))}
+                        </EuiFlexGroup>
                       </EuiPageContentHeaderSection>
                     </EuiPageContentHeader>
                     <EuiPageContentBody>
@@ -416,13 +470,15 @@ export default class App extends Component {
               style={{
                 width: "250px",
                 marginTop: "60px",
-                marginBottom:"16px"
+                marginBottom: "16px"
               }}
             >
-              <EuiPanel style={{
-                position:"fixed",
-                height:"100vh"
-              }}>
+              <EuiPanel
+                style={{
+                  position: "fixed",
+                  height: "100vh"
+                }}
+              >
                 <EuiIcon type="menuRight" onClick={this.toggleRightSidebar} />
                 <EuiText>
                   <p>

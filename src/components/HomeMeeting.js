@@ -52,7 +52,7 @@ export default class HomeMeeting extends Component {
 
           <span style={{ marginLeft: "0.25rem" }}> {"3:26"} </span>
         </div>
-        <EuiSpacer size="s" />
+        <EuiSpacer size="s" />                                                                                                                            
 
         <AudioPlayer />
         <EuiSpacer size="s" />

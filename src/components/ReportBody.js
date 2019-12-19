@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import AtrisRecorder from "./AtrisRecorder/components";
 import { EuiSpacer } from "@elastic/eui";
-import { EuiText, EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { EuiText, EuiFlexGroup, EuiFlexItem, EuiTitle } from "@elastic/eui";
 import { navigate } from "@reach/router";
 import { TextAnnotator } from "react-text-annotate";
 
 import AudioPlayer from "./AudioPlayer";
+
+import { FaHatWizard, FaSnowman } from "react-icons/fa";
 
 const TEXT =
   "When Sebastian Thrun started working on self-driving cars at Google in 2007, few people outside of the company took him seriously. “I can tell you very senior CEOs of major American car companies would shake my hand and turn away because I wasn’t worth talking to,” said Thrun, now the co-founder and CEO of online higher education startup Udacity, in an interview with Recode earlier this week. A little less than a decade later, dozens of self-driving startups have cropped up while automakers around the world clamor, wallet in hand, to secure their place in the fast-moving world of fully automated transportation.";
@@ -33,18 +35,46 @@ export default class ReportBody extends Component {
     return (
       <EuiFlexGroup>
         <EuiFlexItem>
-          {" "}
           <div>
-            {/* <AudioPlayer /> */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row"
+              }}
+            >
+              <FaHatWizard
+                style={{ width: "24px", height: "24px", marginRight: "8px" }}
+              />
+              <EuiTitle>
+                <h2>Transcribe Summary</h2>
+              </EuiTitle>
+            </div>
 
             <EuiText>
-              The transcribe of firt speech by atris hello world
+              The transcribe summary of firt speech by atris hello world.The
+              transcribe summary of firt speech by atris hello world.The
+              transcribe summary of firt speech by atris hello world.The
+              transcribe summary of firt speech by atris hello world.The
+              transcribe summary of firt speech by atris hello world
             </EuiText>
-            <EuiText style={{ marginTop: "8px" }}>
-              I watched C-beams glitter in the dark near the Tannhäuser Gate All
-              those moments will be lost in time, like tears in rain. Time to
-              die.
-            </EuiText>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                marginTop: "8px"
+              }}
+            >
+              <FaSnowman
+                style={{ width: "24px", height: "24px", marginRight: "8px" }}
+              />
+              <EuiTitle>
+                <h2>Transcribe</h2>
+              </EuiTitle>
+            </div>
+
             <TextAnnotator
               style={{
                 // fontFamily: "IBM Plex Sans",
@@ -62,40 +92,40 @@ export default class ReportBody extends Component {
             />
 
             <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello worldThe transcribe
+              of firt speech by atris hello world The transcribe of firt speech
+              by atris hello world The transcribe of firt speech by atris hello
+              world The transcribe of firt speech by atris hello world The
+              transcribe of firt speech by atris hello world
             </EuiText>
             <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello worldThe transcribe
+              of firt speech by atris hello world The transcribe of firt speech
+              by atris hello world The transcribe of firt speech by atris hello
+              world The transcribe of firt speech by atris hello world The
+              transcribe of firt speech by atris hello world
             </EuiText>
             <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello worldThe transcribe
+              of firt speech by atris hello world The transcribe of firt speech
+              by atris hello world The transcribe of firt speech by atris hello
+              world The transcribe of firt speech by atris hello world The
+              transcribe of firt speech by atris hello world
             </EuiText>
             <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello worldThe transcribe
+              of firt speech by atris hello world The transcribe of firt speech
+              by atris hello world The transcribe of firt speech by atris hello
+              world The transcribe of firt speech by atris hello world The
+              transcribe of firt speech by atris hello world
             </EuiText>
 
             <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
-              The transcribe of firt speech by atris hello world
+              The transcribe of firt speech by atris hello worldThe transcribe
+              of firt speech by atris hello world The transcribe of firt speech
+              by atris hello world The transcribe of firt speech by atris hello
+              world The transcribe of firt speech by atris hello world The
+              transcribe of firt speech by atris hello world
             </EuiText>
           </div>
         </EuiFlexItem>
