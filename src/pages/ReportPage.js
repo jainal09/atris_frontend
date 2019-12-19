@@ -32,7 +32,8 @@ import {
   EuiFormControlLayout,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiBadge
+  EuiBadge,
+  EuiSwitch
 } from "@elastic/eui";
 import { Link } from "@reach/router";
 import AudioPlayer from "../components/AudioPlayer";
@@ -44,7 +45,6 @@ import { FiCalendar, FiClock } from "react-icons/fi";
 import ReportBody from "../components/ReportBody";
 import TreeSelect from "../components/TreeSelect/TreeSelect";
 import { EuiPanel } from "@elastic/eui";
-
 
 const badges = [
   "default",
@@ -72,7 +72,9 @@ export default class App extends Component {
       expanded: ["/ENTITIES/"],
       tree_node: [],
       isRightSidebar: true,
-      isMobile: true
+      isMobile: true,
+      headerColor: "white",
+      themeSwitch: localStorage.getItem("ThemeSwitch") === "true"
     };
 
     this.nonExpandLinks = [
@@ -94,6 +96,22 @@ export default class App extends Component {
       }
     ];
   }
+
+  changeTheme = e => {
+    if (e.target.checked === false) {
+      console.log("light here", localStorage.getItem("ThemeSwitch"));
+
+      localStorage.setItem("ThemeSwitch", false);
+
+      this.props.setTheme("light");
+    } else {
+      console.log("dark here", localStorage.getItem("ThemeSwitch"));
+
+      localStorage.setItem("ThemeSwitch", true);
+
+      this.props.setTheme("dark");
+    }
+  };
 
   ExpandLinks = [
     {
@@ -234,6 +252,16 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      this.setState({
+        headerColor: "#1a1b20"
+      });
+    } else {
+      this.setState({
+        headerColor: "white"
+      });
+    }
     document.getElementById("reportPageHeader").style.padding = "0";
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
@@ -299,7 +327,7 @@ export default class App extends Component {
                   top: "0",
                   left: "0",
                   right: "0",
-                  backgroundColor: "white",
+                  backgroundColor: this.state.headerColor,
                   zIndex: "5"
                 }}
               >
@@ -443,16 +471,28 @@ export default class App extends Component {
                             {"3:26"}
                           </span>
                         </div>
-                        <EuiFlexGroup wrap responsive={false} gutterSize="xs" style={{
-                          marginTop:"8px",
-                          marginLeft:"12px"
-                        }}>
+                        <EuiFlexGroup
+                          wrap
+                          responsive={false}
+                          gutterSize="xs"
+                          style={{
+                            marginTop: "8px",
+                            marginLeft: "12px"
+                          }}
+                        >
                           {badges.map(badge => (
                             <EuiFlexItem grow={false} key={badge}>
                               <EuiBadge color={"#c7c7c7"}>{badge}</EuiBadge>
                             </EuiFlexItem>
                           ))}
                         </EuiFlexGroup>
+                      </EuiPageContentHeaderSection>
+                      <EuiPageContentHeaderSection>
+                        <EuiSwitch
+                          label="light/dark"
+                          checked={this.state.themeSwitch}
+                          onChange={this.changeTheme}
+                        />
                       </EuiPageContentHeaderSection>
                     </EuiPageContentHeader>
                     <EuiPageContentBody>

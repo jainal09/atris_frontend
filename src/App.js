@@ -14,9 +14,6 @@ const setTheme = theme => {
 export default class App extends Component {
   componentWillMount() {
     if (localStorage.getItem("theme") === "dark") {
-      // require("@elastic/eui/dist/eui_theme_dark.css");
-      // let stylesheet = document.styleSheets[0];
-      // stylesheet.href = "@elastic/eui/dist/eui_theme_dark.css";
       const theme = "eui_theme_dark";
       const cssElement = document.getElementById("theme_css");
       if (cssElement) {
@@ -25,9 +22,6 @@ export default class App extends Component {
         cssElement.setAttribute("href", href);
       }
     } else {
-      // require("@elastic/eui/dist/eui_theme_light.css");
-      // let stylesheet = document.styleSheets[0];
-      // stylesheet.href = "@elastic/eui/dist/eui_theme_light.css";
       const theme = "eui_theme_light";
       const cssElement = document.getElementById("theme_css");
       if (cssElement) {
@@ -41,12 +35,9 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <HomePage
-          path="/"
-          setTheme={setTheme}
-        />
+        <HomePage path="/" setTheme={setTheme} />
         <RecordPage path="recording" />
-        <ReportPage path="report" />
+        <ReportPage path="report" setTheme={setTheme}/>
       </Router>
     );
   }
