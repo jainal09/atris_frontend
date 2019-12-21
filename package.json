@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@elastic/datemath": "^5.0.2",
+     "@elastic/datemath": "^5.0.2",
     "@elastic/eui": "^17.0.0",
     "@emotion/core": "^10.0.22",
     "@reach/router": "^1.2.1",
@@ -11,7 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "blob-util": "^2.0.2",
-    "emotion-theming": "^10.0.19",
+     "emotion-theming": "^10.0.19",
     "file-saver": "^2.0.2",
     "moment": "^2.24.0",
     "msr": "^1.3.4",

@@ -5,7 +5,9 @@ import RecordPage from "./pages/RecordPage";
 
 // import "@elastic/eui/dist/eui_theme_light.css";
 import ReportPage from "./pages/ReportPage";
-import LandingPage from './pages/LandingPage';
+import LandingPage from "./pages/LandingPage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 const setTheme = theme => {
   localStorage.setItem("theme", theme);
@@ -37,9 +39,12 @@ export default class App extends Component {
     return (
       <Router>
         <LandingPage path="/" />
+        <SignUpPage path="signup" />
+        <LoginPage path="login" />
+
         <HomePage path="/home" setTheme={setTheme} />
         <RecordPage path="recording" />
-        <ReportPage path="report" setTheme={setTheme}/>
+        <ReportPage path="report" setTheme={setTheme} />
       </Router>
     );
   }

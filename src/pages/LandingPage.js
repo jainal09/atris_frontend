@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "@reach/router";
-import "./LandingPage.css";
+// import "./LandingPage.scoped.css";
 import useScript from "../hooks/useScript";
+import useAddRmvStyle from "../hooks/useAddRmvStyle";
 
 export default function LandingPage() {
   useScript("/lpage/js/landing.js");
+  useAddRmvStyle("/lpage/css/style.css", "landing");
   return (
     <div className="nx">
       <header className="nc reveal-from-bottom">
@@ -12,16 +14,17 @@ export default function LandingPage() {
           <div className="nv">
             <div className="nd">
               <h1 className="sh">
-              <Link to="/"><div>
-                  <img
-                    src="/lpage/assets/atrislogo.png"
-                    className="logo_atris"
-                    alt="atris"
-                    width={32}
-                    height={32}
-                  />
-                </div> </Link>
-                
+                <Link to="/">
+                  <div>
+                    <img
+                      src="/lpage/assets/atrislogo.png"
+                      className="logo_atris"
+                      alt="atris"
+                      width={32}
+                      height={32}
+                    />
+                  </div>{" "}
+                </Link>
               </h1>
             </div>
             <button
@@ -86,11 +89,11 @@ export default function LandingPage() {
                     />
                   </h3>
                   <div className="reveal-from-bottom" data-reveal-delay={600}>
-                   <Link to="/" >
-                   <div className="tbuttonn fbuttonl gbuttony"  >
-                      Try It Now
-                    </div>
-                   </Link>
+                    <Link to="/">
+                      <div className="tbuttonn fbuttonl gbuttony">
+                        Try It Now
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -355,8 +358,9 @@ export default function LandingPage() {
                     <p className="sh">
                       We know how important is your each and every conversation
                       is, so we taimport useScript from '../hooks/useScript'; ke
-                      utmost priority to index them so that you can search them
-                      when you need it.
+                      utmost priorimport useAddRmvStyle from
+                      '../hooks/useAddRmvStyle'; ity to index them so that you
+                      can search them when you need it.
                     </p>
                   </div>
                   <div
@@ -436,11 +440,12 @@ export default function LandingPage() {
                       </div>
                     </div>
                     <div className="pricing-item-cta sq">
-                      <Link to="/"> <div className="tbuttonn fbuttonl pbuttond"  >
-                        Start free trial
-                      </div>
+                      <Link to="/">
+                        {" "}
+                        <div className="tbuttonn fbuttonl pbuttond">
+                          Start free trial
+                        </div>
                       </Link>
-                     
                     </div>
                   </div>
                 </div>
@@ -478,7 +483,7 @@ export default function LandingPage() {
                       </div>
                     </div>
                     <div className="pricing-item-cta sq">
-                      <div className="tbuttonn fbuttonl pbuttond"  >
+                      <div className="tbuttonn fbuttonl pbuttond">
                         Start free trial
                       </div>
                     </div>
@@ -538,9 +543,7 @@ export default function LandingPage() {
                 </h3>
               </div>
               <div className="cta-action">
-                <div className="tbuttonn gbuttony"  >
-                  Get started now
-                </div>
+                <div className="tbuttonn gbuttony">Get started now</div>
               </div>
             </div>
           </div>
@@ -552,17 +555,16 @@ export default function LandingPage() {
             <div className="nj ri h">
               <div className="nd">
                 <Link to="/">
-                <div  >
-                  <img
-                    src="/lpage/assets/atrislogo.png"
-                    className="logo_atris"
-                    alt="atris"
-                    width={32}
-                    height={32}
-                  />
-                </div>
+                  <div>
+                    <img
+                      src="/lpage/assets/atrislogo.png"
+                      className="logo_atris"
+                      alt="atris"
+                      width={32}
+                      height={32}
+                    />
+                  </div>
                 </Link>
-                
               </div>
               <div className="rn">
                 <ul className="id">
