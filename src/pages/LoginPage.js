@@ -1,23 +1,23 @@
 import React, { useState, useContext } from "react";
 import { Link } from "@reach/router";
-// import UserContext from "../context/index";
+import UserContext from "../context/index";
 import useAddRmvStyle from '../hooks/useAddRmvStyle';
 
 export default function LoginPage() {
   useAddRmvStyle("/lpage/css/style.css", "landing");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const handleSubmit = evt => {
     evt.preventDefault();
     // alert(`Submitting Name ${name}`)
-    // if (email !== "" && password !== "") {
-    //   let setUser = userContext.setUser;
-    //   // setTimeout(setUser({ user: "admin" }, "/home"), 1000);
-    //   setUser({ user: "admin" })
-    //   console.log("handle qq");
-    // }
+    if (email !== "" && password !== "") {
+      let setUser = userContext.setUser;
+      setTimeout(setUser({ user: "admin" }, "/home"), 1000);
+      // setUser({ user: "admin" })
+      console.log("handle qq");
+    }
     console.log("handle submit");
   };
 

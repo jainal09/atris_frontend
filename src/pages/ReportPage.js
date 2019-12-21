@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
+import ReactPDF from '@react-pdf/renderer';
+
 
 import {
   EuiPage,
