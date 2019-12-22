@@ -85,6 +85,16 @@ export default class AtrisRecorder extends Component {
 
       ws.close();
     };
+
+    ws.onmessage = evt => {
+      // listen to data sent from the websocket server
+      const message = JSON.parse(evt.data)
+      this.setState({dataFromServer: message})
+      console.log(message)
+      }
+
+
+
   };
 
   /**
