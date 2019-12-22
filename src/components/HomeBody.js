@@ -31,7 +31,7 @@ import { EuiText } from "@elastic/eui";
 import { EuiSpacer } from "@elastic/eui";
 import { navigate } from "@reach/router";
 
-const BASE_URL = "http://192.168.43.254:8000/";
+const BASE_URL = "http://192.168.43.254:9000/";
 export default class HomeBody extends Component {
   constructor(props) {
     super(props);

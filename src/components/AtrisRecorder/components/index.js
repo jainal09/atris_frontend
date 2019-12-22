@@ -10,9 +10,20 @@ export default class AtrisRecorder extends Component {
       blobURL: null,
       isRecording: false,
       isPaused: false,
-      ws: null
+      ws: null,
+      audioSegData: []
     };
   }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.audioSegData !== this.state.audioSegData) {
+      let sortedState = this.state.audioSegData.sort((a, b) => {
+        return a.number - b.number;
+      });
+      console.log(sortedState, "sortedState");
+      this.props.setTranscribeData(sortedState);
+    }
+  };
 
   componentDidMount = () => {
     this.connect();
@@ -29,7 +40,6 @@ export default class AtrisRecorder extends Component {
     this.state.ws.close();
 
     clearInterval(this.connectInterval);
-
   };
 
   timeout = 250; // Initial timeout duration as a class variable
@@ -44,7 +54,7 @@ export default class AtrisRecorder extends Component {
     // } catch (error) {
     //   console.log(error); // catch error
     // }
-    var ws = new WebSocket("ws://192.168.43.254:8000/ws/");
+    var ws = new WebSocket("ws://192.168.43.254:9000/ws/");
     let that = this; // cache the this
     // var connectInterval;
 
@@ -88,13 +98,22 @@ export default class AtrisRecorder extends Component {
 
     ws.onmessage = evt => {
       // listen to data sent from the websocket server
-      const message = JSON.parse(evt.data)
-      this.setState({dataFromServer: message})
-      console.log(message)
-      }
+      console.log(evt.data);
 
+      const message = JSON.parse(evt.data);
+      console.log(message, "message xx");
+      let dataFromServer = message.message.message;
+      // let test = {
+      //   segment: 2,
+      //   text:
+      //     "Aerial gate all those moments will come out in time, like period."
+      // };
 
-
+      this.setState({
+        audioSegData: [...this.state.audioSegData, dataFromServer]
+      });
+      console.log(dataFromServer, "dataFromServer");
+    };
   };
 
   /**
