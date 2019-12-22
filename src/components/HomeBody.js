@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import uuidv4 from "uuid/v4";
 
 import moment from "moment";
 
@@ -27,8 +29,9 @@ import HomeMeeting from "./HomeMeeting";
 import { FiPlusCircle } from "react-icons/fi";
 import { EuiText } from "@elastic/eui";
 import { EuiSpacer } from "@elastic/eui";
-import { navigate } from '@reach/router';
+import { navigate } from "@reach/router";
 
+const BASE_URL = "http://192.168.43.254:8000/";
 export default class HomeBody extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +45,34 @@ export default class HomeBody extends Component {
       ProgressValue: 0
     };
   }
+
+  startMeeting = () => {
+    let meetingID = uuidv4();
+    let groupID = uuidv4();
+    let meetingData = {
+      meetingID,
+      groupID
+    }
+    this.props.setMeetingGroupID(meetingID, groupID);
+    var bodyFormData = new FormData();
+    bodyFormData.set("meeting_id", meetingID);
+    bodyFormData.set("group_id", groupID);
+
+    axios({
+      method: "post",
+      url: BASE_URL + "start/",
+      data: bodyFormData,
+      config: { headers: { "Content-Type": "multipart/form-data" } }
+    }).then(response => {
+      console.log("response");
+
+      console.log(response);
+
+      localStorage.setItem('meetingData', JSON.stringify(meetingData));
+
+      navigate("/recording");
+    });
+  };
 
   handleDateChange = date => {
     this.setState({
@@ -98,7 +129,8 @@ export default class HomeBody extends Component {
                         isDisabled={false}
                         description="Click to start Meeting and being Awesome."
                         onClick={() => {
-                            navigate("recording")
+                          // navigate("recording")
+                          this.startMeeting();
                         }}
                       />
                     </EuiFlexItem>
@@ -167,7 +199,7 @@ export default class HomeBody extends Component {
                 <div style={{ wordWrap: "break-word" }}>
                   {this.state.files[0].name}
                 </div>
-                
+
                 <EuiSpacer size="l" />
 
                 <EuiProgress

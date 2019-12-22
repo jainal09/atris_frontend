@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import uuidv4 from "uuid/v4";
 import ReactMic from "./ReactMic";
 
 export default class AtrisRecorder extends Component {
@@ -13,9 +14,23 @@ export default class AtrisRecorder extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.connect();
-  }
+    var meetingObj = localStorage.getItem("meetingData");
+    var meetingData = JSON.parse(meetingObj);
+
+    this.meetingID = meetingData.meetingID;
+    this.groupID = meetingData.groupID;
+  };
+
+  componentWillUnmount = () => {
+    clearInterval(this.connectInterval);
+
+    this.state.ws.close();
+
+    clearInterval(this.connectInterval);
+
+  };
 
   timeout = 250; // Initial timeout duration as a class variable
 
@@ -29,18 +44,18 @@ export default class AtrisRecorder extends Component {
     // } catch (error) {
     //   console.log(error); // catch error
     // }
-    var ws = new WebSocket("ws://192.168.43.254:8070/ws");
+    var ws = new WebSocket("ws://192.168.43.254:8000/ws/");
     let that = this; // cache the this
-    var connectInterval;
+    // var connectInterval;
 
     // websocket onopen event listener
     ws.onopen = () => {
       console.log("connected websocket main component");
 
       this.setState({ ws: ws });
-
+      ws.send(this.meetingID);
       that.timeout = 250; // reset timer to 250 on open of websocket connection
-      clearTimeout(connectInterval); // clear Interval on on open of websocket connection
+      clearInterval(this.connectInterval); // clear Interval on on open of websocket connection
     };
 
     // websocket onclose event listener
@@ -54,7 +69,10 @@ export default class AtrisRecorder extends Component {
       );
 
       that.timeout = that.timeout + that.timeout; //increment retry interval
-      connectInterval = setTimeout(this.check, Math.min(10000, that.timeout)); //call check function after timeout
+      this.connectInterval = setTimeout(
+        this.check,
+        Math.min(10000, that.timeout)
+      ); //call check function after timeout
     };
 
     // websocket onerror event listener

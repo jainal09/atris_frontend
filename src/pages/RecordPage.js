@@ -91,7 +91,10 @@ export default class ReportPage extends Component {
               </EuiPageContentHeaderSection>
             </EuiPageContentHeader>
             <EuiPageContentBody>
-              <RecordBody />
+              <RecordBody 
+          //     meetingID={this.props.meetingID}
+          // groupID={this.props.groupID} 
+          />
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>

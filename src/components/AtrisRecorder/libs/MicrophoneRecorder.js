@@ -153,7 +153,7 @@ export class MicrophoneRecorder {
             audioCtx = AudioContext.getAudioContext();
             audioCtx.resume().then(() => {
               analyser = AudioContext.getAnalyser();
-              mediaRecorder.start(5000);
+              mediaRecorder.start(10000);
               const sourceNode = audioCtx.createMediaStreamSource(stream);
               sourceNode.connect(analyser);
             });

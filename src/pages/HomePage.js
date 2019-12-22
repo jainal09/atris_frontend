@@ -98,7 +98,7 @@ export default class HomePage extends Component {
               </EuiPageContentHeaderSection>
             </EuiPageContentHeader>
             <EuiPageContentBody>
-              <HomeBody />
+              <HomeBody setMeetingGroupID={this.props.setMeetingGroupID}/>
             </EuiPageContentBody>
           </EuiPageContent>
         </EuiPageBody>

@@ -27,6 +27,18 @@ export default class App extends Component {
   //   }
   // };
 
+  state = {
+    meetingID: null,
+    groupID: null
+  };
+
+  setMeetingGroupID = (meetingID, groupID) => {
+    this.setState({
+      meetingID,
+      groupID
+    });
+  };
+
   componentWillMount() {
     if (localStorage.getItem("theme") === "dark") {
       const theme = "eui_theme_dark";
@@ -55,8 +67,16 @@ export default class App extends Component {
         <SignUpPage path="/signup" />
         <LoginPage path="/login" />
 
-        <HomePage path="/home" setTheme={setTheme} />
-        <RecordPage path="/recording" />
+        <HomePage
+          path="/home"
+          setTheme={setTheme}
+          setMeetingGroupID={this.setMeetingGroupID}
+        />
+        <RecordPage
+          path="/recording"
+          // meetingID={this.state.meetingID}
+          // groupID={this.state.groupID}
+        />
         <ReportPage path="/report" setTheme={setTheme} />
 
         {/* <PrivateRoute component={HomePage} path="/home" setTheme={setTheme} />

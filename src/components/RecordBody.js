@@ -6,7 +6,8 @@ import {
   EuiPanel,
   EuiFlexItem,
   EuiFlexGroup,
-  EuiBadge
+  EuiBadge,
+  EuiAvatar
 } from "@elastic/eui";
 import { navigate } from "@reach/router";
 
@@ -22,6 +23,17 @@ const badges = [
   "#fea27f"
 ];
 
+const speakers = [
+  "default",
+  "hollow",
+  "primary",
+  "secondary",
+  "accent",
+  "warning",
+  "danger",
+  "#000",
+  "#fea27f"
+];
 export default class RecordBody extends Component {
   constructor(props) {
     super(props);
@@ -48,8 +60,20 @@ export default class RecordBody extends Component {
             marginTop: "8px"
           }}
         >
-          <div> 00:00 - 00:10</div>
-          <EuiText style={{ marginTop: "8px" }}>
+          <div> 00:00 - 00:10 </div>
+          <EuiFlexGroup
+            wrap
+            responsive={false}
+            gutterSize="xs"
+            style={{ marginTop: "8px" }}
+          >
+            {speakers.map(speaker => (
+              <EuiFlexItem grow={false} key={speaker}>
+                <EuiAvatar size="m" name={speaker} />
+              </EuiFlexItem>
+            ))}
+          </EuiFlexGroup>
+          <EuiText>
             I watched C-beams glitter in the dark near the Tannhäuser Gate All
             those moments will be lost in time, like tears in rain. Time to die
             in hell for gods sake.
