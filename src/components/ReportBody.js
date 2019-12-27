@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from 'react';
 import AtrisRecorder from "./AtrisRecorder/components";
 import { EuiSpacer } from "@elastic/eui";
-import { EuiText, EuiFlexGroup, EuiFlexItem, EuiTitle } from "@elastic/eui";
+import { EuiText, EuiFlexGroup, EuiFlexItem, EuiTitle,EuiTabbedContent } from "@elastic/eui";
 import { navigate } from "@reach/router";
 import { TextAnnotator } from "react-text-annotate";
 
@@ -22,18 +22,13 @@ export default class ReportBody extends Component {
     tag: "default tag"
   };
 
-  componentWillReceiveProps(props) {
-    console.log("new Props");
-    this.setState({ value: props.annotateValue });
-  }
-
-  handleChange = value => {
-    // this.setState({ value });
-  };
-
-  render() {
-    return (
-      <EuiFlexGroup>
+  tabs = [
+    {
+      id: 'report',
+      name: 'Report',
+      content: (
+        <Fragment>
+              <EuiFlexGroup>
         <EuiFlexItem>
           <div>
             <div
@@ -140,6 +135,42 @@ export default class ReportBody extends Component {
           </p>
         </EuiFlexItem> */}
       </EuiFlexGroup>
-    );
+  
+        </Fragment>
+      ),
+    },
+    {
+      id: 'analysis',
+      name: 'Analysis',
+      content: (
+        <Fragment>
+          
+        </Fragment>
+      ),
+    }
+     
+  ];
+
+  componentWillReceiveProps(props) {
+    console.log("new Props");
+    this.setState({ value: props.annotateValue });
+  }
+
+  handleChange = value => {
+    // this.setState({ value });
+  };
+
+  render() {
+    return (
+
+      <EuiTabbedContent
+      tabs={this.tabs}
+      initialSelectedTab={this.tabs[1]}
+      autoFocus="selected"
+      onTabClick={tab => {
+        console.log('clicked tab', tab);
+      }}
+    />
+     );
   }
 }
