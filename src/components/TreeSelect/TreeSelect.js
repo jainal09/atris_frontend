@@ -11,7 +11,6 @@ import "./TreeSelect.css";
 //   DATE: ["2007", "this week"]
 // };
 
-
 // // make sure its tag not label in api res
 // const ApiResEntRange = [
 //   { start: 0, end: 15, label: "PERSON" },
@@ -23,21 +22,21 @@ import "./TreeSelect.css";
 // ];
 
 const ApiResEnt = {
-    PERSON: ["Sebastian Thrun", "Thrun"],
-  
-    DATE: ["2007"]
-  };
-  
-  // IMPORTANT: make sure its tag not label in api res
-  const ApiResEntRange = [
-    {
-      start: 5,
-      end: 20,
-      tag: "PERSON"
-    },
-    { start: 15, end: 20, tag: "PERSON" },
-    { start: 71, end: 75, tag: "DATE" }
-  ];
+  PERSON: ["Sebastian Thrun", "Thrun"],
+
+  DATE: ["2007"]
+};
+
+// IMPORTANT: make sure its tag not label in api res
+const ApiResEntRange = [
+  {
+    start: 5,
+    end: 20,
+    tag: "PERSON"
+  },
+  { start: 15, end: 20, tag: "PERSON" },
+  { start: 71, end: 75, tag: "DATE" }
+];
 
 const modifiedRes = [
   {
@@ -109,13 +108,19 @@ export default class TreeSelect extends Component {
     // checked: [],
     // expanded: ["/ENTITIES"],
     // tree_node: []
+    ApiResEntRange: []
   };
 
   constructor(props) {
     super(props);
   }
 
-  reportThis = this.props.getReportPageThis()
+  componentWillReceiveProps(props) {
+    console.log("new Props");
+    this.setState({ ApiResEntRange: props.ENTITIES });
+  }
+
+  reportThis = this.props.getReportPageThis();
 
   onCheck = (checked, nodeInfo) => {
     // this.setState({ checked });
@@ -170,7 +175,7 @@ export default class TreeSelect extends Component {
       });
       console.log(check_elem_index, "check_elem_index");
 
-      let reqRangeRes = ApiResEntRange.filter(function(el) {
+      let reqRangeRes = this.state.ApiResEntRange.filter(function(el) {
         return el.tag === parentLabel; //label to tag at el
       });
       console.log(reqRangeRes, "reqRangeRes");
@@ -194,113 +199,113 @@ export default class TreeSelect extends Component {
       //process by children
 
       let nodeInfoRes = {
-        "label": "PERSON",
-        "value": "/ENTITIES/PERSON",
-        "children": [
+        label: "PERSON",
+        value: "/ENTITIES/PERSON",
+        children: [
           {
-            "value": "/ENTITIES/PERSON/Sebastian Thrun",
-            "label": "Sebastian Thrun"
+            value: "/ENTITIES/PERSON/Sebastian Thrun",
+            label: "Sebastian Thrun"
           },
           {
-            "value": "/ENTITIES/PERSON/Thrun",
-            "label": "Thrun"
+            value: "/ENTITIES/PERSON/Thrun",
+            label: "Thrun"
           }
         ],
-        "parent": {
-          "value": "/ENTITIES",
-          "label": "ENTITIES",
-          "children": [
+        parent: {
+          value: "/ENTITIES",
+          label: "ENTITIES",
+          children: [
             {
-              "value": "/ENTITIES/PERSON",
-              "label": "PERSON",
-              "children": [
+              value: "/ENTITIES/PERSON",
+              label: "PERSON",
+              children: [
                 {
-                  "value": "/ENTITIES/PERSON/Sebastian Thrun",
-                  "label": "Sebastian Thrun"
+                  value: "/ENTITIES/PERSON/Sebastian Thrun",
+                  label: "Sebastian Thrun"
                 },
                 {
-                  "value": "/ENTITIES/PERSON/Thrun",
-                  "label": "Thrun"
+                  value: "/ENTITIES/PERSON/Thrun",
+                  label: "Thrun"
                 }
               ]
             },
             {
-              "value": "/ENTITIES/NORP",
-              "label": "NORP",
-              "children": [
+              value: "/ENTITIES/NORP",
+              label: "NORP",
+              children: [
                 {
-                  "value": "/ENTITIES/NORP/American",
-                  "label": "American"
+                  value: "/ENTITIES/NORP/American",
+                  label: "American"
                 }
               ]
             },
             {
-              "value": "/ENTITIES/ORG",
-              "label": "ORG",
-              "children": [
+              value: "/ENTITIES/ORG",
+              label: "ORG",
+              children: [
                 {
-                  "value": "/ENTITIES/ORG/Recode",
-                  "label": "Recode"
+                  value: "/ENTITIES/ORG/Recode",
+                  label: "Recode"
                 }
               ]
             },
             {
-              "value": "/ENTITIES/DATE",
-              "label": "DATE",
-              "children": [
+              value: "/ENTITIES/DATE",
+              label: "DATE",
+              children: [
                 {
-                  "value": "/ENTITIES/DATE/2007",
-                  "label": "2007"
+                  value: "/ENTITIES/DATE/2007",
+                  label: "2007"
                 },
                 {
-                  "value": "/ENTITIES/DATE/this week",
-                  "label": "this week"
+                  value: "/ENTITIES/DATE/this week",
+                  label: "this week"
                 }
               ]
             }
           ]
         },
-        "isChild": true,
-        "isParent": true,
-        "isLeaf": false,
-        "showCheckbox": true,
-        "disabled": false,
-        "treeDepth": 1,
-        "index": 0,
-        "checked": true,
-        "expanded": false,
-        "checkState": 0
-      }
+        isChild: true,
+        isParent: true,
+        isLeaf: false,
+        showCheckbox: true,
+        disabled: false,
+        treeDepth: 1,
+        index: 0,
+        checked: true,
+        expanded: false,
+        checkState: 0
+      };
 
-      let nodeChildren= nodeInfo.children
-      let label = nodeInfo.label
+      let nodeChildren = nodeInfo.children;
+      let label = nodeInfo.label;
 
-      let reqRangeRes = ApiResEntRange.filter(function(el) {
+      let reqRangeRes = this.state.ApiResEntRange.filter(function(el) {
         return el.tag === label;
       });
 
-      let add_remove_annote_state = nodeChildren.join(",").indexOf( checked.join( "," ) ) == -1
-    
-      console.log(add_remove_annote_state, "bba")
+      let add_remove_annote_state =
+        nodeChildren.join(",").indexOf(checked.join(",")) == -1;
+
+      console.log(add_remove_annote_state, "bba");
 
       let { setAnnotateValue, annotateValue } = this.props;
 
       //removeing duplicates from state and adding values
-      let noDuplicates = reqRangeRes.filter((elem) =>{
-        return   !annotateValue.includes(elem)
-    })
+      let noDuplicates = reqRangeRes.filter(elem => {
+        return !annotateValue.includes(elem);
+      });
 
       if (add_remove_annote_state) {
         // add to annote state
         setAnnotateValue([...annotateValue, ...noDuplicates]);
       } else {
         // remove from annote state
-         let newVal = reqRangeRes.filter((elem) =>{
-            return   !annotateValue.includes(elem)
-        })
+        let newVal = reqRangeRes.filter(elem => {
+          return !annotateValue.includes(elem);
+        });
         setAnnotateValue(newVal);
       }
-    
     }
 
     console.log(checked);
@@ -360,7 +365,6 @@ export default class TreeSelect extends Component {
         onExpand={this.onExpand}
         showNodeIcon={false}
         expandOnClick={true}
-       
         onClick={() => {
           console.log("click");
         }}

@@ -28,12 +28,13 @@ export default class AtrisRecorder extends Component {
   };
 
   componentDidMount = () => {
-    this.connect();
+   
     var meetingObj = localStorage.getItem("meetingData");
     var meetingData = JSON.parse(meetingObj);
 
     this.meetingID = meetingData.meetingID;
     this.groupID = meetingData.groupID;
+    this.connect();
   };
 
   componentWillUnmount = () => {

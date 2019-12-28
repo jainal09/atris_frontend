@@ -1,7 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 import AtrisRecorder from "./AtrisRecorder/components";
 import { EuiSpacer } from "@elastic/eui";
-import { EuiText, EuiFlexGroup, EuiFlexItem, EuiTitle,EuiTabbedContent } from "@elastic/eui";
+import {
+  EuiText,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiTitle,
+  EuiTabbedContent
+} from "@elastic/eui";
 import { navigate } from "@reach/router";
 import { TextAnnotator } from "react-text-annotate";
 
@@ -16,115 +22,126 @@ const TAG_COLORS = {
   PERSON: "#84d2ff"
 };
 
+
+
 export default class ReportBody extends Component {
   state = {
-    value: this.props.annotateValue,
-    tag: "default tag"
+    annotateValue: this.props.annotateValue,
+    tag: "default tag",
+    MeetingText: "",
+    Summary: ""
   };
 
   tabs = [
     {
-      id: 'report',
-      name: 'Report',
+      id: "report",
+      name: "Report",
       content: (
         <Fragment>
-              <EuiFlexGroup>
-        <EuiFlexItem>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
-            >
-              <FaHatWizard
-                style={{ width: "24px", height: "24px", marginRight: "8px" }}
-              />
-              <EuiTitle>
-                <h2>Transcribe Summary</h2>
-              </EuiTitle>
-            </div>
+          <EuiFlexGroup>
+            <EuiFlexItem>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row"
+                  }}
+                >
+                  <FaHatWizard
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px"
+                    }}
+                  />
+                  <EuiTitle>
+                    <h2>Transcribe Summary</h2>
+                  </EuiTitle>
+                </div>
 
-            <EuiText>
-              The transcribe summary of firt speech by atris hello world.The
-              transcribe summary of firt speech by atris hello world.The
-              transcribe summary of firt speech by atris hello world.The
-              transcribe summary of firt speech by atris hello world.The
-              transcribe summary of firt speech by atris hello world
-            </EuiText>
+                <EuiText>{this.state.Summary}</EuiText>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                marginTop: "8px"
-              }}
-            >
-              <FaSnowman
-                style={{ width: "24px", height: "24px", marginRight: "8px" }}
-              />
-              <EuiTitle>
-                <h2>Transcribe</h2>
-              </EuiTitle>
-            </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginTop: "8px"
+                  }}
+                >
+                  <FaSnowman
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px"
+                    }}
+                  />
+                  <EuiTitle>
+                    <h2>Transcribe</h2>
+                  </EuiTitle>
+                </div>
 
-            <TextAnnotator
-              style={{
-                // fontFamily: "IBM Plex Sans",
-                // maxWidth: 500,
-                lineHeight: 1.5
-              }}
-              content={TEXT}
-              value={this.state.value}
-              onChange={this.handleChange}
-              getSpan={span => ({
-                ...span,
-                tag: this.state.tag,
-                color: TAG_COLORS[this.state.tag]
-              })}
-            />
+                <TextAnnotator
+                  style={{
+                    // fontFamily: "IBM Plex Sans",
+                    // maxWidth: 500,
+                    lineHeight: 1.5
+                  }}
+                  content={this.state.MeetingText}
+                  value={this.state.annotateValue}
+                  onChange={this.handleChange}
+                  getSpan={span => ({
+                    ...span,
+                    tag: this.state.tag,
+                    color: TAG_COLORS[this.state.tag]
+                  })}
+                />
 
-            <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe
-              of firt speech by atris hello world The transcribe of firt speech
-              by atris hello world The transcribe of firt speech by atris hello
-              world The transcribe of firt speech by atris hello world The
-              transcribe of firt speech by atris hello world
-            </EuiText>
-            <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe
-              of firt speech by atris hello world The transcribe of firt speech
-              by atris hello world The transcribe of firt speech by atris hello
-              world The transcribe of firt speech by atris hello world The
-              transcribe of firt speech by atris hello world
-            </EuiText>
-            <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe
-              of firt speech by atris hello world The transcribe of firt speech
-              by atris hello world The transcribe of firt speech by atris hello
-              world The transcribe of firt speech by atris hello world The
-              transcribe of firt speech by atris hello world
-            </EuiText>
-            <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe
-              of firt speech by atris hello world The transcribe of firt speech
-              by atris hello world The transcribe of firt speech by atris hello
-              world The transcribe of firt speech by atris hello world The
-              transcribe of firt speech by atris hello world
-            </EuiText>
+                {/* <EuiText>
+                  The transcribe of firt speech by atris hello worldThe
+                  transcribe of firt speech by atris hello world The transcribe
+                  of firt speech by atris hello world The transcribe of firt
+                  speech by atris hello world The transcribe of firt speech by
+                  atris hello world The transcribe of firt speech by atris hello
+                  world
+                </EuiText>
+                <EuiText>
+                  The transcribe of firt speech by atris hello worldThe
+                  transcribe of firt speech by atris hello world The transcribe
+                  of firt speech by atris hello world The transcribe of firt
+                  speech by atris hello world The transcribe of firt speech by
+                  atris hello world The transcribe of firt speech by atris hello
+                  world
+                </EuiText>
+                <EuiText>
+                  The transcribe of firt speech by atris hello worldThe
+                  transcribe of firt speech by atris hello world The transcribe
+                  of firt speech by atris hello world The transcribe of firt
+                  speech by atris hello world The transcribe of firt speech by
+                  atris hello world The transcribe of firt speech by atris hello
+                  world
+                </EuiText>
+                <EuiText>
+                  The transcribe of firt speech by atris hello worldThe
+                  transcribe of firt speech by atris hello world The transcribe
+                  of firt speech by atris hello world The transcribe of firt
+                  speech by atris hello world The transcribe of firt speech by
+                  atris hello world The transcribe of firt speech by atris hello
+                  world
+                </EuiText>
 
-            <EuiText>
-              The transcribe of firt speech by atris hello worldThe transcribe
-              of firt speech by atris hello world The transcribe of firt speech
-              by atris hello world The transcribe of firt speech by atris hello
-              world The transcribe of firt speech by atris hello world The
-              transcribe of firt speech by atris hello world
-            </EuiText>
-          </div>
-        </EuiFlexItem>
-        {/* <EuiFlexItem
+                <EuiText>
+                  The transcribe of firt speech by atris hello worldThe
+                  transcribe of firt speech by atris hello world The transcribe
+                  of firt speech by atris hello world The transcribe of firt
+                  speech by atris hello world The transcribe of firt speech by
+                  atris hello world The transcribe of firt speech by atris hello
+                  world
+                </EuiText> */}
+              </div>
+            </EuiFlexItem>
+            {/* <EuiFlexItem
           style={{ minWidth: "384px", width: "25vw", flexBasis: "auto" }}
         >
           <p>Another content grid item</p>
@@ -134,26 +151,24 @@ export default class ReportBody extends Component {
             different content?
           </p>
         </EuiFlexItem> */}
-      </EuiFlexGroup>
-  
+          </EuiFlexGroup>
         </Fragment>
-      ),
+      )
     },
     {
-      id: 'analysis',
-      name: 'Analysis',
-      content: (
-        <Fragment>
-          
-        </Fragment>
-      ),
+      id: "analysis",
+      name: "Analysis",
+      content: <Fragment></Fragment>
     }
-     
   ];
 
   componentWillReceiveProps(props) {
     console.log("new Props");
-    this.setState({ value: props.annotateValue });
+    this.setState({
+      annotateValue: props.annotateValue,
+      MeetingText: this.props.MeetingText,
+      Summary: this.props.Summary
+    });
   }
 
   handleChange = value => {
@@ -162,15 +177,14 @@ export default class ReportBody extends Component {
 
   render() {
     return (
-
       <EuiTabbedContent
-      tabs={this.tabs}
-      initialSelectedTab={this.tabs[1]}
-      autoFocus="selected"
-      onTabClick={tab => {
-        console.log('clicked tab', tab);
-      }}
-    />
-     );
+        tabs={this.tabs}
+        initialSelectedTab={this.tabs[0]}
+        autoFocus="selected"
+        onTabClick={tab => {
+          console.log("clicked tab", tab);
+        }}
+      />
+    );
   }
 }
