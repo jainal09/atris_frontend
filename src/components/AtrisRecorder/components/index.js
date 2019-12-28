@@ -57,7 +57,7 @@ export default class AtrisRecorder extends Component {
     // } catch (error) {
     //   console.log(error); // catch error
     // }
-    var ws = new WebSocket("ws://127.0.0.1:8000/ws/");
+    var ws = new WebSocket("ws://192.168.43.217:8000/ws/");
     let that = this; // cache the this
     // var connectInterval;
 
