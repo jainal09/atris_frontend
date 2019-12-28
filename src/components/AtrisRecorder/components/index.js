@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import uuidv4 from "uuid/v4";
 import ReactMic from "./ReactMic";
+import { blobToBase64String } from "blob-util";
+
 
 export default class AtrisRecorder extends Component {
   constructor(props) {
@@ -54,7 +56,7 @@ export default class AtrisRecorder extends Component {
     // } catch (error) {
     //   console.log(error); // catch error
     // }
-    var ws = new WebSocket("ws://192.168.43.254:9000/ws/");
+    var ws = new WebSocket("ws://127.0.0.1:8000/ws/");
     let that = this; // cache the this
     // var connectInterval;
 
@@ -144,8 +146,21 @@ export default class AtrisRecorder extends Component {
     console.log(recordedBlob, "qqq qq");
   };
 
-  onStop = recordedBlob => {
-    this.sendMessage(recordedBlob);
+  onStop = async recordedBlob => {
+    //ala phone battery died !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Allah hu akbar
+    // ab run karoo
+    console.log(recordedBlob, "tapa tap")
+
+    let base64Audio = await blobToBase64String(recordedBlob)
+   
+    
+    let finalMsg = {
+      status : "finished",
+      meetingID: this.meetingID
+    }
+
+    console.log(finalMsg, "tapa tap 2") 
+    this.sendMessage(JSON.stringify(finalMsg));
   };
 
   render() {

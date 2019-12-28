@@ -24,7 +24,7 @@ const badges = [
 ];
 
 const speakers = [
- "1"
+  "1"
 ];
 export default class RecordBody extends Component {
   state = {
@@ -35,6 +35,26 @@ export default class RecordBody extends Component {
     this.setState({
       transcribeData: data
     });
+  };
+
+
+  getTime = Tseconds => {
+    let totalSeconds = Tseconds;
+    let minutes = this.formatTime(parseInt(totalSeconds / 60));
+    let seconds = this.formatTime(totalSeconds % 60);
+    let timeString = "" + minutes + ":" + seconds;
+    return timeString;
+  };
+
+  formatTime = val => {
+    // use as seconds = formatTime(totalSeconds % 60)
+    // minutes = formatTime(parseInt(totalSeconds / 60)
+    var valString = val + "";
+    if (valString.length < 2) {
+      return "0" + valString;
+    } else {
+      return valString;
+    }
   };
 
   render() {
@@ -84,7 +104,7 @@ export default class RecordBody extends Component {
       return elem.hasOwnProperty("sounds");
     });
 
-    // console.log(textData, audioData, "xxa");
+     console.log(textData, audioData, "xxa");
 
     return (
       <div>
@@ -104,13 +124,13 @@ export default class RecordBody extends Component {
 
         {textData.map((data, index) => {
           return (
-            <EuiPanel
+            data.text ? <EuiPanel
               style={{
                 marginTop: "8px"
               }}
               key={index}
             >
-              <div> 00:00 - 00:10 </div>
+              <div>{this.getTime((data.segment) * 10 - 9)} - {this.getTime((data.segment) * 10)} </div>
               <EuiFlexGroup
                 wrap
                 responsive={false}
@@ -131,8 +151,8 @@ export default class RecordBody extends Component {
                   </EuiFlexItem>
                 ))} */}
 
-              
-                {audioData[index].sounds.result.map(elem => {
+
+                {audioData[index] && audioData[index].sounds.result.map(elem => {
                   return (
                     <EuiFlexItem grow={false} key={elem.labels}>
                       <EuiBadge color={"#c7c7c7"}>{elem.labels}</EuiBadge>
@@ -140,7 +160,7 @@ export default class RecordBody extends Component {
                   );
                 })}
               </EuiFlexGroup>
-            </EuiPanel>
+            </EuiPanel> : null
           );
         })}
       </div>
