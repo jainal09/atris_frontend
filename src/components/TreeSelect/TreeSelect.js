@@ -21,9 +21,11 @@ import "./TreeSelect.css";
 //   { start: 365, end: 374, label: "DATE" }
 // ];
 
+//let data = [{'start': 10, 'end': 21, 'tag': 'DATE', 'text': 'later later'}, {'start': 10, 'end': 21, 'tag': 'PERSON', 'text': 'Sebastian Thrun'}, {'start': 10, 'end': 21, 'tag': 'DATE', 'text': '2007'}]
+
+
 const ApiResEnt = {
   PERSON: ["Sebastian Thrun", "Thrun"],
-
   DATE: ["2007"]
 };
 

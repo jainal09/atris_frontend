@@ -29,7 +29,8 @@ export default class ReportBody extends Component {
     annotateValue: this.props.annotateValue,
     tag: "default tag",
     MeetingText: "",
-    Summary: ""
+    Summary: "",
+    test:"test state"
   };
 
   tabs = [
@@ -56,11 +57,11 @@ export default class ReportBody extends Component {
                     }}
                   />
                   <EuiTitle>
-                    <h2>Transcribe Summary</h2>
+                    <h2>Transcribe Summary {this.state.MeetingText}</h2>
                   </EuiTitle>
                 </div>
 
-                <EuiText>{this.state.Summary}</EuiText>
+                <EuiText>{this.props.Summary} </EuiText>
 
                 <div
                   style={{
@@ -98,14 +99,14 @@ export default class ReportBody extends Component {
                   })}
                 />
 
-                {/* <EuiText>
-                  The transcribe of firt speech by atris hello worldThe
-                  transcribe of firt speech by atris hello world The transcribe
-                  of firt speech by atris hello world The transcribe of firt
-                  speech by atris hello world The transcribe of firt speech by
-                  atris hello world The transcribe of firt speech by atris hello
-                  world
+       
+            <EuiText>
+                    ??
+                    {this.state.MeetingText}
+                    {this.state.test}
+                   {console.log(this.props.MeetingText,"wwww ww")}
                 </EuiText>
+                {/*
                 <EuiText>
                   The transcribe of firt speech by atris hello worldThe
                   transcribe of firt speech by atris hello world The transcribe
@@ -162,14 +163,27 @@ export default class ReportBody extends Component {
     }
   ];
 
-  componentWillReceiveProps(props) {
-    console.log("new Props");
-    this.setState({
-      annotateValue: props.annotateValue,
-      MeetingText: this.props.MeetingText,
-      Summary: this.props.Summary
-    });
-  }
+  // componentWillReceiveProps(props) {
+  //   console.log("new Props");
+  //   this.setState({
+  //     annotateValue: props.annotateValue,
+  //     MeetingText: this.props.MeetingText,
+  //     Summary: this.props.Summary
+  //   });
+  // }
+
+  componentDidUpdate(prevProps){
+          if (this.props.MeetingText !== prevProps.MeetingText) {
+            this.setState({ 
+              annotateValue: this.props.annotateValue,
+              MeetingText: this.props.MeetingText,
+              Summary: this.props.Summary
+            }, ()=>{
+              this.forceUpdate()
+            });
+           
+          }
+        }
 
   handleChange = value => {
     // this.setState({ value });
@@ -177,14 +191,84 @@ export default class ReportBody extends Component {
 
   render() {
     return (
-      <EuiTabbedContent
-        tabs={this.tabs}
-        initialSelectedTab={this.tabs[0]}
-        autoFocus="selected"
-        onTabClick={tab => {
-          console.log("clicked tab", tab);
-        }}
-      />
+      // <EuiTabbedContent
+      //   tabs={this.tabs}
+      //   initialSelectedTab={this.tabs[0]}
+      //   autoFocus="selected"
+      //   onTabClick={tab => {
+      //     console.log("clicked tab", tab);
+      //   }}
+      // />
+      <Fragment>
+          <EuiFlexGroup>
+            <EuiFlexItem>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row"
+                  }}
+                >
+                  <FaHatWizard
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px"
+                    }}
+                  />
+                  <EuiTitle>
+                    <h2>Transcribe Summary</h2>
+                  </EuiTitle>
+                </div>
+
+                <EuiText>{this.props.Summary} </EuiText>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginTop: "8px"
+                  }}
+                >
+                  <FaSnowman
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px"
+                    }}
+                  />
+                  <EuiTitle>
+                    <h2>Transcribe</h2>
+                  </EuiTitle>
+                </div>
+
+                <TextAnnotator
+                  style={{
+                    // fontFamily: "IBM Plex Sans",
+                    // maxWidth: 500,
+                    lineHeight: 1.5
+                  }}
+                  content={this.state.MeetingText}
+                  value={this.state.annotateValue}
+                  onChange={this.handleChange}
+                  getSpan={span => ({
+                    ...span,
+                    tag: this.state.tag,
+                    color: TAG_COLORS[this.state.tag]
+                  })}
+                />
+
+       
+            {/* <EuiText>
+                   {this.state.MeetingText}
+                </EuiText> */}
+                
+              </div>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+        </Fragment>
     );
   }
 }

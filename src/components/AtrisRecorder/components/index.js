@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import uuidv4 from "uuid/v4";
+import axios from "axios";
+
 import ReactMic from "./ReactMic";
 import { blobToBase64String } from "blob-util";
+import { navigate } from "@reach/router";
+
+const BASE_URL = "http://127.0.0.1:8000/";
 
 
 export default class AtrisRecorder extends Component {
@@ -29,11 +34,13 @@ export default class AtrisRecorder extends Component {
 
   componentDidMount = () => {
    
-    var meetingObj = localStorage.getItem("meetingData");
-    var meetingData = JSON.parse(meetingObj);
+    let groupID = localStorage.getItem("groupID");
+    let meetingID = localStorage.getItem("meetingID");
 
-    this.meetingID = meetingData.meetingID;
-    this.groupID = meetingData.groupID;
+    // var meetingData = JSON.parse(meetingObj);
+
+    this.meetingID = meetingID;
+    this.groupID = groupID;
     this.connect();
   };
 
@@ -57,7 +64,7 @@ export default class AtrisRecorder extends Component {
     // } catch (error) {
     //   console.log(error); // catch error
     // }
-    var ws = new WebSocket("ws://192.168.43.217:8000/ws/");
+    var ws = new WebSocket("ws://127.0.0.1:8000/ws/");
     let that = this; // cache the this
     // var connectInterval;
 
@@ -148,20 +155,32 @@ export default class AtrisRecorder extends Component {
   };
 
   onStop = async recordedBlob => {
-    //ala phone battery died !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Allah hu akbar
-    // ab run karoo
     console.log(recordedBlob, "tapa tap")
 
-    let base64Audio = await blobToBase64String(recordedBlob)
-   
-    
-    let finalMsg = {
-      status : "finished",
-      meetingID: this.meetingID
-    }
+    // let base64Audio = await blobToBase64String(recordedBlob)
+    // let finalMsg = {
+    //   status : "finished",
+    //   meetingID: this.meetingID
+    // }
+    // console.log(finalMsg, "tapa tap 2") 
+    // this.sendMessage(JSON.stringify(finalMsg));
 
-    console.log(finalMsg, "tapa tap 2") 
-    this.sendMessage(JSON.stringify(finalMsg));
+    var bodyFormData = new FormData();
+    bodyFormData.set("meeting_id", this.meetingID);
+    bodyFormData.set("file", recordedBlob);
+
+    axios({
+      method: "post",
+      url: BASE_URL + "audio/upload/",
+      data: bodyFormData,
+      config: { headers: { "Content-Type": "multipart/form-data" } }
+    }).then(response => {
+      console.log("response", "enddddd");
+
+      // console.log(response);
+
+      // navigate("/home");
+    });
   };
 
   render() {

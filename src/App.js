@@ -77,7 +77,9 @@ export default class App extends Component {
           // meetingID={this.state.meetingID}
           // groupID={this.state.groupID}
         />
-        <ReportPage path="/report" setTheme={setTheme} />
+        <ReportPage path="/report" 
+        setTheme={setTheme} 
+        />
 
         {/* <PrivateRoute component={HomePage} path="/home" setTheme={setTheme} />
           <PrivateRoute component={RecordPage} path="/recording" />

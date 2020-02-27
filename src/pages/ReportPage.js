@@ -48,7 +48,7 @@ import ReportBody from "../components/ReportBody";
 import TreeSelect from "../components/TreeSelect/TreeSelect";
 import { EuiPanel } from "@elastic/eui";
 
-const BASE_URL = "http://192.168.43.217:8000/";
+const BASE_URL = "http://127.0.0.1:8000/";
 
 const badges = [
   "default",
@@ -363,21 +363,22 @@ export default class App extends Component {
     this.resize();
     window.responsiveWave();
 
-    var meetingObj = localStorage.getItem("meetingData");
+    var meetingID = localStorage.getItem("meetingID");
 
     var bodyFormData = new FormData();
-    bodyFormData.set("meeting_id", meetingObj.meetingID);
+    bodyFormData.set("meeting_id", meetingID);
     // bodyFormData.set("group_id", groupID);
 
     axios({
       method: "post",
-      url: BASE_URL + "meetings/",
-      data: bodyFormData,
+      url: BASE_URL + "report/",
+      data: bodyFormData, 
       config: { headers: { "Content-Type": "multipart/form-data" } }
     }).then(response => {
       console.log("response");
 
-      let ApiResParse = response;
+      let ApiResParse = response.data;
+      console.log(ApiResParse)
 
       let meetingText = ApiResParse.fullText;
       let entities = ApiResParse.entities[1];
@@ -388,7 +389,8 @@ export default class App extends Component {
         MeetingText: meetingText,
         ENTITIES: entities,
         KeyWords: keywords,
-        Summary: summary
+        Summary: summary,
+        // meetingName: meetingText
       });
     });
   }
@@ -606,11 +608,12 @@ export default class App extends Component {
                             marginLeft: "12px"
                           }}
                         >
-                          {this.state.KeyWords.map(elem => (
+                          {/* {console.log(this.state.KeyWords, "xxx this.state.KeyWords")} */}
+                          {/* {this.state.KeyWords.map(elem => (
                             <EuiFlexItem grow={false} key={elem[0]}>
                               <EuiBadge color={"#c7c7c7"}>{elem[0]}</EuiBadge>
                             </EuiFlexItem>
-                          ))}
+                          ))} */}
                         </EuiFlexGroup>
                       </EuiPageContentHeaderSection>
                       <EuiPageContentHeaderSection>
@@ -624,6 +627,7 @@ export default class App extends Component {
                     <EuiPageContentBody>
                       {flyout}
                       <ReportBody
+                      key={this.state}
                         annotateValue={this.state.annotateValue}
                         Summary={this.state.Summary}
                         MeetingText={this.state.MeetingText}

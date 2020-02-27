@@ -29,9 +29,9 @@ import HomeMeeting from "./HomeMeeting";
 import { FiPlusCircle } from "react-icons/fi";
 import { EuiText } from "@elastic/eui";
 import { EuiSpacer } from "@elastic/eui";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 
-const BASE_URL = "http://192.168.43.217:8000/";
+const BASE_URL = "http://127.0.0.1:8000/";
 export default class HomeBody extends Component {
   constructor(props) {
     super(props);
@@ -42,17 +42,36 @@ export default class HomeBody extends Component {
       files: {},
       fileUploadView: false,
       meetingName: "My Awesome Meeting",
-      ProgressValue: 0
+      ProgressValue: 0,
+      homeRes: []
     };
   }
+
+  componentDidMount = () => {
+    axios({
+      method: "get",
+      url: BASE_URL + "home/"
+    }).then(response => {
+      console.log("response");
+
+      console.log(response.data);
+      this.setState({
+        homeRes: response.data
+      });
+
+      // localStorage.setItem('meetingData', JSON.stringify(meetingData));
+
+      // navigate("/recording");
+    });
+  };
 
   startMeeting = () => {
     let meetingID = uuidv4();
     let groupID = uuidv4();
-    let meetingData = {
-      meetingID,
-      groupID
-    }
+    // let meetingData = {
+    //   meetingID,
+    //   groupID
+    // }
     this.props.setMeetingGroupID(meetingID, groupID);
     var bodyFormData = new FormData();
     bodyFormData.set("meeting_id", meetingID);
@@ -68,7 +87,8 @@ export default class HomeBody extends Component {
 
       console.log(response);
 
-      localStorage.setItem('meetingData', JSON.stringify(meetingData));
+      localStorage.setItem("meetingID", meetingID);
+      localStorage.setItem("groupID", groupID);
 
       navigate("/recording");
     });
@@ -245,7 +265,39 @@ export default class HomeBody extends Component {
         </EuiFormRow>
         {modal}
         <EuiHorizontalRule />
-        <HomeMeeting />
+        {/* <div>
+           <HomeMeeting />
+        </div> */}
+
+        <div>
+          {this.state.homeRes.map((item, i) => (
+            <Link
+              to="/report"
+              onClick={() => {
+                localStorage.setItem("meetingID", item.meeting_id);
+              }}
+            >
+              <HomeMeeting
+                key={i}
+                meetingTitle={item.meeting_name}
+                meetingDate={item.date}
+                duration={"xx:xx"}
+                keyWords={item.keywords}
+                summary={item.summarizer}
+                audioWaveform={item.audio_waveform.data}
+                audioURL={item.file_url}
+                // meetingDate, duration, keyWords, summary
+                // "meeting_id": "fd434981-2aa8-4432-910b-cd17ee2cfff9",
+                // "date": "2020-01-29T11:00:20.268610Z",
+                // "meeting_name": "meeting 1",
+                // "keywords": "[['god', 0.2718250226855089]]",
+                // "summarizer": "allh hee jihad hai",
+                // "file_url": "https://atris.blob.core.windows.net/atris/media%2Fb501ed1d-b83d-4b13-85fc-bc8457b3d5b6%2F52883eeb-1337-461b-8a74-27a167718977himono.wav",
+                // "audio_waveform"
+              />
+            </Link>
+          ))}
+        </div>
 
         <FiPlusCircle
           onClick={this.showModal}
